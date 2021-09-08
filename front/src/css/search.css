@@ -1,0 +1,36 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.s{
+    border: 1px solid ;
+    display: flex;
+    width: 100%;
+    height: 6vh;
+    background-color:  #F0F0F0;
+    display: none;
+    transform: all .2s ;
+}
+
+#btn{
+    height: auto;
+    width: 5%;
+    height: auto;
+    border-radius: 100%;
+    display: inline-block;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+form{
+    width: 100%;
+}
+.d{
+    display: inline-block;
+    height: 5.8vh;
+    outline-width: 0;
+    width: 100%;
+} 

@@ -1,0 +1,76 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.main_login{
+    width: 100vw;
+    height: 100%;
+}
+.login_head>p{
+    color: black;
+    font-size: 1.2rem;
+    text-align: center;
+    user-select: none;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.login_head>.login_heading{
+    font-size: 2rem;
+    font-weight: bold;
+    user-select: none;
+}
+.form_login{
+    border: .5px solid darkgrey;
+    box-shadow: 1px 1px 5px 1px darkgrey;
+    width: 60%;
+    margin: 2% 20%;
+    height: auto;
+}
+.form_login>.form_div_login{
+    margin: auto 1%;
+    margin-top: 5%;
+    user-select: none;
+}
+.login_links{
+    margin: 5% 5%;
+    display: flex;
+    justify-content: space-between;
+}
+.login_links>a{
+    color: 	#000080;
+    font-size: 1rem;
+    user-select: none;
+    transition: all .3s;
+}
+.login_links>a:hover{
+    color: #3466fc;
+}
+.login_btn{
+    position: relative;
+    margin: 10% 5%;
+    margin-bottom: 20%;
+}
+#submit_btn{
+    width: 80%;
+    margin: auto 10%;
+    user-select: none;
+}
+#reset_form{
+    display: none;
+}
+#message{
+    height: 150px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: unset;
+    word-wrap: break-word;
+    display: flex;
+    overflow-x: auto;
+}
+@media only screen and (max-width: 450px) {
+    .form_login{
+        width: 90%;
+        margin: 5% 5%;
+    }
+  }

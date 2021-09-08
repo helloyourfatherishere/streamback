@@ -1,0 +1,124 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.nav{
+    display: flex;
+    height: auto;
+    padding: 1% auto;
+    border: 1px solid darkgrey;
+    background-color: #F0F0F0;
+    margin-bottom: .5%;
+    width: 100%;
+}
+.logo{
+    flex: .20;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.search_box{
+    flex: .45;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.search_field{
+    width: 100%;
+    height: auto;
+}
+.search_bar{
+    width: 82%;
+    height: 6vh;
+    outline-width: 0;
+}
+.search_btn{
+    width: 10%;
+    height: 6vh;
+    position: absolute;
+    text-align: center;
+    background-color: #3466fc;
+    color: white;
+    border: none;
+    transition: all .2s ease-in;
+    cursor: pointer;
+    font-size: 2rem;
+}
+.search_btn:hover, .search_btn:active{
+    background-color:  #000080;
+}
+.opt{
+    flex: .35;
+    padding: 0;
+    margin-left:2%;
+    position: relative;
+    width: 100%;
+}
+.links{
+    position: relative;
+    width: 100%;
+    padding: 1%;
+}
+#link{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin:auto 50%;
+    padding: 0;
+}
+#btns{
+    position: relative;
+    right: -55%;
+    padding: 2% .1%;
+    width: 100%;
+}
+#search_icon{
+    display: none;
+    border-radius: 100%;
+}
+#cart_link{
+    color: black;
+    text-decoration: none;
+}
+@media screen and (max-width: 550px) {
+    #search_icon{
+        display: flex;
+    }
+    .search_box{
+        display: none;
+    } 
+    .opt{
+        flex: .50;
+        width: 100vh;
+    }
+    .logo{
+        flex: .50;
+    }
+    #btns{
+        margin: 50px;
+    }
+    }
+
+    @media screen and (max-width: 400px) {
+        #search_icon{
+            display: flex;
+        }
+        .search_box{
+            display: none;
+        } 
+        .opt{
+            flex: .60;
+            width: 100vh;
+        }
+        .logo{
+            flex: .40;
+        }
+        .logo>h1{
+            font-size: 1rem;
+        }
+        #btns{
+            margin: 20px;
+        }
+        }

@@ -1,0 +1,105 @@
+body {
+  font-family: Arial;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+img {
+  vertical-align: middle;
+}
+
+.view_imgs{
+  border: .5px solid ;
+  display: flex;
+  width: auto;
+  height: auto;
+  margin-bottom: 5%;
+}
+/* Position the image container (needed to position the left and right arrows) */
+.container {
+  position: relative;
+  height: auto;
+  flex: 1;
+  margin: .5%;
+}
+/* Hide the images by default */
+.images_div{
+  width: 700px;
+  height: 500px;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  top: -5;
+  left: -5;
+}
+.image_div{
+  width: 100%;
+}
+
+#view_img{
+  width: 90%;
+  height: 450px;
+}
+.detail{
+  flex: .35;
+  margin: .5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.views_title{
+  margin-top: 2%;
+}
+.views_title>p{
+  color: black;
+  font-size: 130%;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-weight: bold;
+}
+.views_del>p{
+  color: black;
+  font-size: 80%;
+  font-family: sans-serif;
+}
+.views_button{
+  margin-top: 2%;
+  display: flex;
+  justify-content: space-between;
+  transition: all .3s;
+}
+.views_btn{
+  background-color: #3466fc;
+  color: white;
+  border: none;
+  width: 45%;
+  height: 30px;
+  margin: 1%;
+  cursor: pointer;
+  transition: all .3s;
+}
+.views_btn:hover{
+  background-color: #000080;
+}
+@media only screen and (max-width: 600px){
+  .view_imgs{
+    display: block;
+  }
+  .images_div{
+    width: 100%;
+    top: 3;
+    left: 2;
+    height: 70vh;
+    display: flex;
+  }
+  .image_div{
+    width: 100%;
+    height: auto;
+  }
+  #view_img{
+    height:60%;
+    width: 100%;
+  }
+}

@@ -1,0 +1,280 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.parent_card{
+    height: auto;
+}
+.heading{
+    height: auto;
+}
+.heading_h1{
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 2rem;
+}
+.card{
+    width: auto;
+    margin: auto 1%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    height: auto;
+}
+.cards{
+    border: 1px solid darkgrey;
+    width: 193px;
+    height: auto;
+    user-select: none;
+    margin: 1% 4px;
+    transition: all .2s ease-in;
+    position: relative;
+    clear: both;
+}
+.cards:hover{
+    box-shadow: 1px 1px 5px 1px darkgrey;
+    transform: scale(1.05);
+    background-color: #F0F0F0;
+}
+.cards:active{
+    background-color: #DCDCDC;
+    box-shadow: 1px 1px 5px 1px #3466fc;
+}
+.img_div{
+    width: 190px;
+    height:210px;
+    text-align: center;
+    border-bottom: 1px solid darkgrey;
+}
+.img_div>img{
+    width: 190px;
+    height: 200px;
+    text-align: center;
+}
+.title{
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    width: 185px; 
+    width: 98%; 
+    height: auto;
+    margin: 3% .5%; 
+    word-wrap: break-word;
+    white-space: nowrap;
+}
+.title>p{
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    white-space: nowrap;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-transform: capitalize;
+}
+.ex{
+    width: 100%;
+    height: auto;
+    margin: 2% auto 1% auto;
+    color: white;
+    background-color: #3466fc;
+    text-align: center;
+}
+.more{
+    text-align: right;
+    user-select: none;
+}
+.more>a{
+    margin:.5% 3%;
+    text-decoration: none;
+    color: white;
+    background-color: #3466fc;
+    display: inline-block;
+    width: 130px;
+    height: 25px;
+    text-transform: capitalize;
+    font-size: 1rem;
+    text-align: center;
+    transition: all .2s ease-in;
+}
+.more>a:hover{
+    background-color: #000080;
+}
+.link{
+    color: black;
+    text-decoration: none;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.brand_div{
+    height: auto;
+    border-top: .5px dashed #3466fc;
+    border-bottom: .5px dashed #3466fc;
+    color: #3466fc;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-transform: capitalize;
+    text-align: center;
+    margin-bottom: 2%;
+}
+@media only screen and (max-width: 550px) {
+    .card{
+        justify-content: space-around;
+    }
+    .cards{
+        border: 1px solid darkgrey;
+        width: 170px;
+        height: auto;
+        user-select: none;
+        margin: 1% 4px;
+        transition: all .2s ease-in;
+    }
+    .img_div{
+        width: 168px;
+        height:210px;
+        text-align: center;
+        border-bottom: 1px solid darkgrey;
+    }
+    .img_div>img{
+        width: 160px;
+        height: 180px;
+        text-align: center;
+    }
+    .title{
+        text-overflow: ellipsis;
+        overflow: hidden; 
+        width: 98%; 
+        height: auto;
+        margin: 2% .5%; 
+        white-space: nowrap;
+    }
+    .title>p{
+        text-overflow: ellipsis;
+        overflow: hidden; 
+        white-space: nowrap;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        text-transform: capitalize;
+    }
+    .more>a{
+        text-align: center;
+        position: relative;
+        left: -5%;
+        width: 80%;
+    }
+  }
+
+  
+@media only screen and (max-width: 390px) {
+    .card{
+        justify-content: space-around;
+    }
+    .cards{
+        border: 1px solid darkgrey;
+        width: 150px;
+        height: auto;
+        user-select: none;
+        margin: 1% 4px;
+        transition: all .2s ease-in;
+    }
+    .img_div{
+        width: 130px;
+        height:180px;
+        text-align: center;
+        border-bottom: 1px solid darkgrey;
+    }
+    .img_div>img{
+        width: 146px;
+        height: 170px;
+        text-align: center;
+    }
+    .title{
+        text-overflow: ellipsis;
+        overflow: hidden; 
+        width: 120px; 
+        height: auto;
+        margin: 2% .5%; 
+        white-space: nowrap;
+    }
+    .title>p{
+        text-overflow: ellipsis;
+        overflow: hidden; 
+        white-space: nowrap;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        text-transform: capitalize;
+    }
+  }
+  @media only screen and (max-width: 350px) {
+    .card{
+        justify-content: space-around;
+    }
+    .cards{
+        border: 1px solid darkgrey;
+        width: 120px;
+        height: auto;
+        user-select: none;
+        margin: 1% 4px;
+        transition: all .2s ease-in;
+    }
+    .img_div{
+        width: 120px;
+        height:180px;
+        text-align: center;
+        border-bottom: 1px solid darkgrey;
+    }
+    .img_div>img{
+        width: 120px;
+        height: 150px;
+        text-align: center;
+    }
+    .title{
+        text-overflow: ellipsis;
+        overflow: hidden; 
+        width: 120px; 
+        height: auto;
+        margin: 2% .5%; 
+        white-space: nowrap;
+    }
+    .title>p{
+        text-overflow: ellipsis;
+        overflow: hidden; 
+        white-space: nowrap;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        text-transform: capitalize;
+    }
+  }
+  @media only screen and (max-width: 300px) {
+    .card{
+        justify-content: space-around;
+    }
+    .cards{
+        border: 1px solid darkgrey;
+        width: 120px;
+        height: auto;
+        user-select: none;
+        margin: 1% 4px;
+        transition: all .2s ease-in;
+    }
+    .img_div{
+        width: 120px;
+        height:180px;
+        text-align: center;
+        border-bottom: 1px solid darkgrey;
+    }
+    .img_div>img{
+        width: 120px;
+        height: 150px;
+        text-align: center;
+    }
+    .title{
+        text-overflow: ellipsis;
+        overflow: hidden; 
+        width: 120px; 
+        height: auto;
+        margin: 2% .5%; 
+        white-space: nowrap;
+    }
+    .title>p{
+        text-overflow: ellipsis;
+        overflow: hidden; 
+        white-space: nowrap;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        text-transform: capitalize;
+    }
+  }
+
+  

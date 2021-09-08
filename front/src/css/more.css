@@ -1,0 +1,118 @@
+    /* The side navigation menu */
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+  .sidenav {
+  height: 100vh; /* 100% Full-height */
+  width: auto; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  right: 0;
+  background-color: white; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  }
+  .more_links{
+    width: 100%;
+    list-style: none;
+    margin: none;
+  }
+  .more_links>li{
+      color: black;
+      list-style:none;
+      font-size: 1.5rem;
+      text-align: left;
+      cursor: pointer;
+      border-bottom: 1px solid #F0F0F0;
+      transition: all .2s ease;
+      user-select: none;
+      margin: none;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+  /* The navigation menu links */
+  #close_btn {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+    user-select: none;
+    cursor: pointer;
+  }
+  #close_btn:hover{
+    color: red;
+    background-color: transparent;
+  } 
+  /* When you mouse over the navigation links, change their color */
+  .sidenav a:hover {
+    background-color: #DCDCDC;
+  }
+  /* Position and style the close button (top right corner) */
+  .sidenav{
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 1.5rem;
+  margin-left: 5px;
+  }
+
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-width: 550px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 1.2rem;}
+  #more{
+    width: 50%;
+  }
+  }
+  .icon{
+    position:absolute;
+    display: inline-block;
+    right: 10px;
+    font-size: 20px;
+    user-select: none;
+    cursor: pointer;
+  }
+  #snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+  }
+  
+  #snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
+  
+  @-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+  }
+  
+  @keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }

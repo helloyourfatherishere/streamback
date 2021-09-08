@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .account{
+        border: 1px solid red;
+    }
+    .info{
+        border: 1px solid black;
+        display: none;
+    }
+    .colour{
+        color: red;
+    }
+</style>
+<body>
+
+    <div class="account" id="account">
+         <form>
+        EMAIL: <input type="email" name="email" id="email" placeholder="abc@g..." id="email"><br>
+        <p class="colour" id="email_para">add your email address</p>
+        PASSWPRD: <input type="password" name="pass" id="pass" placeholder="123***" id="pass"><br>
+        <p class="colour" id="pass_para">value must be greater than 8</p>
+        <button id="submit_account">CREATE</button>
+    </form>
+    </div><br><br>
+
+
+    <div class="info" id="info">
+        <form action="/create-account" method="post">
+            
+            <input type="hidden" name="email"  placeholder="abc@g..." id="email_info"><br>
+            <input type="hidden" name="pass" placeholder="123***" id="pass_info"><br>
+            <input type="text" name="name" placeholder="enter your name..."><br>
+            <input type="email" name="contact_email" placeholder="contact email abc@g..."><br>
+            <input type="tel" name="phone" placeholder="your contact no 03..."><br>
+            <input type="text" name="address" placeholder="your home address"><br>
+            <input type="text" name="security_code" placeholder="write four digits security number...">
+            <br>
+            <button type="submit">CREATE</button>
+        </form>
+    </div>
+
+<script type="text/javascript">
+    var pass= document.getElementById("pass")
+    var email= document.getElementById("email");
+    var info= document.getElementById("info");
+    var submit_account= document.getElementById("submit_account");
+    var account_div=  document.getElementById("account");
+
+    var email_para=document.getElementById("email_para");
+    var pass_para=document.getElementById("pass_para");
+    var pass_value;
+    var email_value;
+    var email_validate;
+    var pass_validate;
+    var check= function(){
+        if(this.name=="email"){
+            if(this.value.includes("@")){
+                email_para.style.color="green";
+                email_value=this.value;
+                email_validate=true
+            }
+            else{
+                email_para.style.color="red"
+                email_validate=false;
+            }
+        }
+        else if(this.name=="pass"){
+            if(this.value.length>=8){
+            pass_para.style.color="green";
+            pass_value= this.value;
+            pass_validate=true;
+        }
+        else{
+            pass_para.style.color="red";
+            pass_validate=false;
+        }
+        }
+    };
+
+    pass.addEventListener("input", check)
+    email.addEventListener("input", check)
+
+    var account= function(e){
+        e.preventDefault();
+        console.log(email_validate + " " + pass_validate)
+        if(email_validate && pass_validate){
+            info.style.display="block";
+            account_div.style.display="none";
+            let email_info=document.getElementById("email_info");
+            let pass_info= document.getElementById("pass_info");
+            email_info.value=email_value;
+            pass_info.value=pass_value;
+        }
+        else{
+            alert("EMAIL OR PASSWORD CRITERIA IS NOT FULFILLED")
+        }
+    };
+    submit_account.addEventListener("click", account);
+</script>
+</body>
+</html>

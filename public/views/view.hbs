@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <style>
+        *{
+            margin: 0;
+            padding:0;
+            box-sizing: border-box;
+        }
+        .cards{
+            border: 1px solid black;
+            height: auto;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .card{
+            width:170px;
+            height: 180px;
+            border: 1px solid grey;
+            display: inline-block;
+            margin: 3px 10px;
+        }
+        .card>img{
+            border: 1px solid red;
+            width: 170px;
+            height: 120px;
+            display: block;
+            margin-bottom: 8px;
+        }
+        ..card>p{
+            display: block;
+        }
+        .order{
+            border: 1px solid red;
+            display:none;
+        }
+        .userDetails{
+            border: 1px solid red;
+            display:none;
+        }
+    </style>
+</head>
+<body>
+    {{#each data.images}}
+        <img src="{{this.link}}" alt="images" {{this.id}}>
+    {{/each}}
+    {{#if sell}}
+    <p>{{data.sell_price}}</p>
+    {{/if}}
+
+        <button type="submit" id="order_btn">BUY</button>
+
+        <form action="/addtocart/{{data._id}}" method="post">
+            <button type="submit" id="cart_btn">ADD TO CART</button>
+        </form>
+        <p>$ {{data.price}}</p>
+        <p>{{data.title}}</p>
+        <p>{{data.des}}</p>
+        <p>{{data.note}}</p>
+
+        <form action="/comment/{{data._id}}" method="post">
+            <input type="text" name="comment" id="comment" required="required" placeholder="comment here...">
+            <button type="submit" id="comment_btn">COMMENT</button>
+        </form>
+    <div class="userDetails" id="userDetails">
+        <form>
+            <input type="text" name="name" id="name" placeholder="enter your name" required="required">
+            <input type="email" name="email" id="email" placeholder="enter email address" required="required">
+            <input type="text" name="phone" id="phone" placeholder="enter your phone no" required="required">
+            <input type="text" name="whatsapp" id="whatsapp" placeholder="enter your whatsapp no" required="required">
+            <input type="text" name="address" id="address" placeholder="enter your address" required="required">
+            <button type="submit" id="userInfo">ADD INFO</button>
+        </form>
+    </div>
+    <br><div class="order" id="order">
+        
+        <form action="/order/unregistered" method="post">
+                <img src="{{data.main_img.link}}" alt="product mage">
+                <p>{{data.title}}</p>
+                </a> <br>
+                <p>{{data.price}}</p>
+
+                {{!-- PRODUCT DETAILS --}}
+                <input type="radio" name="paymentMethod" id="paymentMethod" value="cash on delivery" checked="checked">CASH ON DELIVEY <br>
+                <input type="hidden" value="{{data._id}}" name="id">
+                <input type="hidden" value="{{data.price}}" name="price">
+                <input type="hidden" value="{{data.main_img.link}}" name="img">
+                <input type="hidden" value="{{data.title}}" name="title">
+                <input type="text" name="quantity" placeholder="quantity" required="required"> <br>
+                <input type="text" name="colors" placeholder="colours: red, blue..." required="required">{{this.colors}} <br>
+                <input type="text" name="sizes" placeholder="size: small, medium..." required="required">{{this.sizes}} <br>
+                <input type="text" name="message" placeholder="add your message" required="required"><br>
+                <hr>
+
+                {{!-- USER DETAILS --}}
+                <input type="hidden" name="name" id="nameInfo">
+                <input type="hidden" name="email" id="emailInfo">
+                <input type="hidden" name="phone" id="phoneInfo">
+                <input type="hidden" name="whatsapp" id="whatsappInfo">
+                <input type="hidden" name="address" id="addressInfo">
+                
+            <button type="submit">CHECK OUT</button>
+        </form>
+    </div>
+
+        <div class="cards">
+        {{#each more}}
+        <a href="/view/{{this._id}}">
+            <div class="card">
+                <img src="{{this.main_img.link}}" alt="title image he ye">
+                <p>{{this.title}}</p>
+            </div>
+        </a>
+        {{/each}}
+        </div>
+
+        <div>
+            COMMENTS:
+            {{#each data.comments}}
+            <p><b>{{this.name}}</b>:  {{this.comment}}</p>
+            {{/each}}
+        </div>
+    <script>
+        var cart_btn=document.getElementById("cart_btn");
+        var cart= function(e){
+            e.preventDefault();
+        };
+        cart_btn.addEventListener("submit", cart);
+
+        var userDetails= document.getElementById("userDetails");
+        var order= document.getElementById("order");
+        var userInfoBtn = document.getElementById("userInfo");
+        var btn= document.getElementById("order_btn")
+        var commentBtn= document.getElementById("comment_btn");
+        var detailFunction= function(e){
+            e.preventDefault();
+            userDetails.style.display="block"
+        };
+        btn.addEventListener("click", detailFunction)
+
+        var orderFunction= function(e){
+            e.preventDefault();
+            var name= document.getElementById("name").value;
+            var email= document.getElementById("email").value;
+            var phone= document.getElementById("phone").value;
+            var whatsapp= document.getElementById("whatsapp").value;
+            var address= document.getElementById("address").value;
+            var nameInfo= document.getElementById("nameInfo");
+            var emailInfo= document.getElementById("emailInfo");
+            var phoneInfo= document.getElementById("phoneInfo");
+            var whatsappInfo= document.getElementById("whatsappInfo");
+            var addressInfo= document.getElementById("addressInfo");
+
+            console.log(name)
+            console.log(email)
+            console.log(phone)
+            console.log(whatsapp)
+            console.log(address)
+
+            
+            console.log(nameInfo)
+            console.log(emailInfo)
+            console.log(phoneInfo)
+            console.log(whatsappInfo)
+            console.log(addressInfo)
+
+
+            nameInfo.value=name;
+            emailInfo.value=email;
+            phoneInfo.value=phone;
+            whatsappInfo.value=whatsapp;
+            addressInfo.value=address;
+
+            userDetails.style.display="none"
+            order.style.display="block"
+        };
+        userInfoBtn.addEventListener("click", orderFunction);
+
+        commentBtn.addEventListener("submit", (e)=>{e.preventDefault()})
+    </script>
+</body>
+</html> 
+        

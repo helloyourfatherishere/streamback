@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .order{
+            border: 1px solid red;
+            display:none;
+        }
+        .userDetails{
+            border: 1px solid red;
+            display:none;
+        }
+    </style>
+</head>
+<body>
+    {{#each product}}
+    <a href="/view/{{this._id}}">
+        <img src="{{this.main_img.link}}" alt="product mage">
+        <p>{{this.title}}</p>
+        <form action="/removeCart/{{../userId}}/{{this._id}}" method="post">
+            <button type="submit" id="remove_btn">REMOVE</button>
+        </form>
+        </a>
+    {{/each}}
+
+    <br><br>
+    <button type="submit" id="order_btn">ORDER</button>
+    <br><br>
+    <div class="userDetails", id="userDetails">
+        <form>
+            <input type="text" name="name" id="name" placeholder="enter your name" required="required">
+            <input type="email" name="email" id="email" placeholder="enter email address" required="required">
+            <input type="text" name="phone" id="phone" placeholder="enter your phone no" required="required">
+            <input type="text" name="whatsapp" id="whatsapp" placeholder="enter your whatsapp no" required="required">
+            <input type="text" name="address" id="address" placeholder="enter your address" required="required">
+            <button type="submit" id="userInfo">ADD INFO</button>
+        </form>
+    </div>
+    <br><div class="order" id="order">
+        
+        <form action="/order/register/{{userId}}" method="post">
+            {{#each product}}
+            <a href="/view/{{this._id}}">
+                <img src="{{this.main_img.link}}" alt="product mage">
+                <p>{{this.title}}</p>
+                </a> <br>
+                <p>{{this.price}}</p>
+
+                {{!-- PRODUCT DETAILS --}}
+                <input type="hidden" value="{{this._id}}" name="product{{@index}}">
+                <input type="hidden" value="{{this.main_img.link}}" name="product{{@index}}">
+                <input type="hidden" value="{{this.title}}" name="product{{@index}}">
+                <input type="hidden" value="{{this.price}}" name="product{{@index}}">
+                <input type="text" name="product{{@index}}" placeholder="quantity" required="required"> <br>
+                <input type="text" name="product{{@index}}" placeholder="colours: red, blue..." required="required">{{this.colors}} <br>
+                <input type="text" name="product{{@index}}" placeholder="size: small, medium..." required="required">{{this.sizes}} <br>
+                <hr>
+            {{/each}}
+
+                {{!-- USER DETAILS --}}
+                <input type="hidden" name="name" id="nameInfo">
+                <input type="hidden" name="email" id="emailInfo">
+                <input type="hidden" name="phone" id="phoneInfo">
+                <input type="hidden" name="whatsapp" id="whatsappInfo">
+                <input type="hidden" name="address" id="addressInfo">
+                <input type="text" name="message" id="message" placeholder="add your message">
+                <input type="radio" name="paymentMethod" id="paymentMethod" value="cash on delivery" checked="checked">CASH ON DELIVEY <br>
+            <button type="submit">CHECK OUT</button>
+        </form>
+    </div>
+
+    <script>
+        var btn= document.getElementById("order_btn");
+        var userDetails= document.getElementById("userDetails");
+        var order= document.getElementById("order");
+        var userInfoBtn = document.getElementById("userInfo");
+        var detailFunction= function(e){
+            e.preventDefault();
+            userDetails.style.display="block"
+        };
+        btn.addEventListener("click", detailFunction)
+
+        var orderFunction= function(e){
+            e.preventDefault();
+            var name= document.getElementById("name").value;
+            var email= document.getElementById("email").value;
+            var phone= document.getElementById("phone").value;
+            var whatsapp= document.getElementById("whatsapp").value;
+            var address= document.getElementById("address").value;
+            var nameInfo= document.getElementById("nameInfo");
+            var emailInfo= document.getElementById("emailInfo");
+            var phoneInfo= document.getElementById("phoneInfo");
+            var whatsappInfo= document.getElementById("whatsappInfo");
+            var addressInfo= document.getElementById("addressInfo");
+
+            nameInfo.value=name;
+            emailInfo.value=email;
+            phoneInfo.value=phone;
+            whatsappInfo.value=whatsapp;
+            addressInfo.value=address;
+
+            userDetails.style.display="none"
+            order.style.display="block"
+        };
+        userInfoBtn.addEventListener("click", orderFunction)
+    </script>
+    </body>
+</html>

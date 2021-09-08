@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+        *{
+            margin: 0;
+            padding:0;
+            box-sizing: border-box;
+        }
+        .cards{
+            border: 1px solid black;
+            height: auto;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .card{
+            width:170px;
+            height: 180px;
+            border: 1px solid grey;
+            display: inline-block;
+            margin: 3px 10px;
+        }
+        .card>img{
+            border: 1px solid red;
+            width: 170px;
+            height: 120px;
+            display: block;
+            margin-bottom: 8px;
+        }
+        ..card>p{
+            display: block;
+        }
+        .nav{
+          border: 1px solid red;
+          width: 200px;
+        }
+        .nav>ul>li{
+          font-size: 25px;
+        } 
+        .sub_ul>a{
+          cursor: pointer;
+        }
+        .nav_ul>li:hover .sub_ul{
+          color: red;
+        }
+        .sub_ul>a>li{
+          font-size: 25px;
+          margin-left: 25px;
+        }
+        .navLinks{
+          background-color: lightgray;
+        }
+        .navLinks>a{
+          color: black;
+          margin:2px 3px;
+          text-decoration: none;
+          transition: background-color .4s ease-in;
+        }
+        .navLinks>a:hover{
+          background-color: gray;
+          color: white;
+        }
+    </style>
+</head>
+<body>
+        <div class="nav">
+          <a href="/create-account">CREATE ACCOUNT</a>
+          <a href="/login">LOGIN</a>
+          <a href="/cart">CART</a>
+          <a href="/order">ORDER</a>
+          <a href="/recieved">ORDER</a>
+          <a href="/forgot/pass">Change Password</a>
+          <a href="/forgot/security_code">Change Security Code</a>
+          <form action="/logout" method="post">
+            <button type="submit">LOGOUT</button>
+          </form>
+        </div>
+
+        <div class="area">
+                <div class="search">
+                <form method="get" action="/search">
+                <input type="search" name="search" placeholder="search here....." id="search" class="text" autocomplete="off">  
+                <input type="submit" value="Search" class="btn">
+                </form>
+                </div>
+        </div>
+          <div class="navLinks">
+            <a href="/view/more/pants">pants</a>
+            <a href="/view/more/shirts">shirts</a>
+            <a href="/view/more/t-shirts">t-shirts</a>
+            <a href="/view/more/jackets">jackets</a>
+            <a href="/view/more/hoodies">hoodies</a>
+            <a href="/view/more/shalwar-kameez">shalwar-kameez</a>
+            <a href="/view/more/ladies-kurti">ladies-kurti</a>
+            <a href="/view/more/collections">collections</a>
+            <a href="/view/more/undergarments">undergarments</a>
+          </div>
+        <div class="nav">
+          <ul class="nav_ul">
+              <li>Pants
+                <ul class="sub_ul">
+                  <a href="/l/pant/men"><li>For Mens</li></a>
+                  <a href="/l/pant/women"><li>For Womens</li></a>
+                </ul>
+              </li>
+              <li>Shirts
+                <ul class="sub_ul">
+                  <a href="/l/shirt/men"><li>For Mens</li></a>
+                  <a href="/l/shirt/women"><li>For Womens</li></a>
+                </ul>
+              </li>
+              <li>T-Shirts
+                <ul class="sub_ul">
+                  <a href="/l/t-shirt/men"><li>For Mens</li></a>
+                  <a href="/l/t-shirt/women"><li>For Womens</li></a>
+                </ul>
+              </li>
+              <li>Jackets
+                <ul class="sub_ul">
+                  <a href="/l/jacket/men"><li>For Mens</li></a>
+                  <a href="/l/jacket/women"><li>For Womens</li></a>
+                </ul>
+              </li>
+              <li>Hoodies
+                <ul class="sub_ul">
+                  <a href="/l/hoodie/men"><li>For Mens</li></a>
+                  <a href="/l/hoodie/women"><li>For Womens</li></a>
+                </ul>
+              </li>
+              <li>Shalwar Kameez
+                <ul class="sub_ul">
+                  <a href="/l/shalwar-kameez/men"><li>For Mens</li></a>
+                  <a href="/l/shalwar-kameez/women"><li>For Womens</li></a>
+                </ul>
+              </li>
+              <li>Ladies Kurti
+                <ul class="sub_ul">
+                  <a href="/l/ladies-kurti/men"><li>For Mens</li></a>
+                  <a href="/l/ladies-kurti/women"><li>For Womens</li></a>
+                </ul>
+              </li>
+              <li>Collections
+                <ul class="sub_ul">
+                  <a href="/l/colllection/men"><li>For Mens</li></a>
+                  <a href="/l/colllection/women"><li>For Womens</li></a>
+                </ul>
+              </li>
+              <li>Undergarments
+                <ul class="sub_ul">
+                  <a href="/l/undergarment/men"><li>For Mens</li></a>
+                  <a href="/l/undergarment/women"><li>For Womens</li></a>
+                </ul>
+              </li>
+              <li>Brands
+                <ul class="sub_ul">
+                  <a href="/b/bata/find"><li>Bata</li></a>
+                  <a href="/b/denim/find"><li>Denim</li></a>
+                  <a href="/b/gucci/dind"><li>Gucci</li></a>
+                </ul>
+              </li>
+          </ul>
+        </div>
+    <div class="main">
+        <div class="cards">
+        {{#each data}}
+        <a href="/view/{{this._id}}">
+            <div class="card">
+                <img src="{{this.main_img.link}}" alt="title image he ye">
+                <p>{{this.title}}</p>
+            </div>
+        </a>
+        {{/each}}
+            <a href="/view/more/shirts">VIEW MORE</a>
+        </div>
+    </div>
+      <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript">
+           $(function(){
+    $("#search").autocomplete({
+      source: function (req, res){
+        $.ajax({
+          url: "/autocomplete",
+          dataType: "jsonp",
+          type: "GET",
+          data: req,
+          success: function(data){
+            res(data)
+            console.log(data)
+          },
+          error: function(err){
+            console.log(err.status)
+          }
+        })
+      },
+      minLength: 1,
+      select: function(event, ui){
+        if(ui.item){
+          $("#search").text(ui.item.label)
+          console.log(ui.item)
+        }
+      }
+    })
+   })
+    </script>s
+</body>
+</html>

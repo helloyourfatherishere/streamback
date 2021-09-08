@@ -1,0 +1,129 @@
+.view_main{
+  width: 100%;
+  height: auto;
+}
+.view_imgs{
+  width: 100%;
+  height: 80%;
+}
+.view_des{
+  width: 100%;
+  height: auto;
+  display: flex;
+}
+.view_description{
+  flex: .55;
+  padding: 2%;
+}
+.descript, .view_note{
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 110%;
+  text-transform: capitalize;
+}
+.view_table{
+  flex: .45;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.table{
+  width: 80%;
+  height: auto;
+  border: 1px solid black;
+  margin: 2% auto;
+}
+td{
+  width: auto;
+  height: auto;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  padding: 1%;
+  word-wrap: break-word;
+}
+.view_more_head{
+  font-size: 140%;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-weight: bold;
+}
+.view_more_card{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 90%;
+  margin: 1% 5%;
+  align-items: center;
+}
+.comment_div{
+  height: auto;
+  display: flex;
+}
+.comment_div>form{
+  display: flex;
+  justify-content: center;
+}
+.view_textarea{
+  width: 70%;
+}
+.view_textarea>textarea{
+  width: 100%;
+  height: 40px;
+}
+.view_btn>button{
+  height: 40px;
+  width: 100px;
+  color: white;
+  background-color: #3466fc;
+  border: none;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  user-select: none;
+  cursor: pointer;
+  transition: all .3s;
+}
+.view_btn>button:hover, .view_btn>button:active{
+  background-color: #000080;
+}
+.comments_div{
+  margin: 2% auto;
+}
+.comm_head{
+  font-size: 140%;
+  font-weight: bold;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.fieldset{
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 5px;
+  border-top-right-radius: 10px;
+  margin: auto 3%;
+  background-color: #F0F0F0;
+  width: 75%;
+  border: .5px solid darkgray;
+}
+.legend{
+  color: #3466fc;
+  font-size: 80%;
+}
+.check{
+  font-size: 4px;
+}
+@media only screen and (max-width: 600px) {
+  .view_des{
+    display: inline-block;
+  }
+  .view_more_card{
+    flex-wrap: nowrap;
+    width: 100%;
+    margin: 0;
+    overflow-x: auto;
+    justify-content: space-between;
+    padding: auto 5%;
+    margin: 2% auto;
+    transition: all .3s;
+  }
+  .view_more_card::-webkit-scrollbar{
+    display: none;
+  }
+  .view_more_card>.link>.cards{
+    align-self: flex-start;
+    align-content: flex-start;
+  }
+}

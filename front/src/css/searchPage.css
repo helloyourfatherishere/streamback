@@ -1,0 +1,19 @@
+.info{
+    margin-bottom: 1%;
+    padding: 1%;
+}
+.info>p{
+    font-size: 1.4rem;
+    word-spacing: -1px;
+    text-transform: capitalize;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.search_value{
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #3466fc;
+}
+.first_letter{
+    font-size: 1.5rem;
+    font-weight: bold;
+}

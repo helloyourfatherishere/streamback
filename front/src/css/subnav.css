@@ -1,0 +1,111 @@
+.items{
+    background-color: #F0F0F0;
+    border: 1px solid #F0F0F0;
+    display: flex;
+    width: 100%;
+    overflow-x: auto;
+    user-select: none;
+    display: none;
+}
+.items::-webkit-scrollbar{
+    display: none;
+}
+.item{
+    border: 1px solid #0000ff;
+    min-width: 130px;
+    margin: .5% 1%;
+    text-align: center;
+    user-select: none;
+    transition: all .3s;
+    border-radius: 50px;
+    cursor: pointer;
+}
+.item>a{
+    color: #3466fc;
+    text-decoration: none;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-transform: capitalize;
+    transition: all .3s;
+    cursor: pointer;
+}
+.item:hover{
+    background-color: #0000ff;
+}
+.item:hover a{
+    color: white;
+}
+.item:active{
+    background-color: #0000ff;
+}
+.item:active a{
+    color: white;
+}
+
+
+.cate_pc{
+    position: absolute;
+    right: 0;
+    top: 7%;
+    clear: both;
+    z-index: 10;
+    background-color: #F0F0F0;
+    border: 1px solid lightgray;
+    width: 20%;
+    max-height: 300px;
+    height: auto;
+    min-height: 70%;
+    overflow-y: auto;
+}
+.cate_pc>p{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+    font-size: 140%;
+}
+.vertical_items{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.vertical_item{
+    min-width: 30%;
+    width: auto;
+    max-width: auto;
+    height: 20px;
+    margin: 1% 1%;
+    text-align: center;
+    user-select: none;
+    transition: all .3s;
+    border-radius: 50px;
+    cursor: pointer;
+    border: 1px solid #0000ff;
+}
+.vertical_item>a{
+    color: #3466fc;
+    text-decoration: none;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-transform: capitalize;
+    transition: all .3s;
+    cursor: pointer;
+    font-size: 90%;
+}
+
+.vertical_item:hover{
+    background-color: #0000ff;
+}
+.vertical_item:hover a{
+    color: white;
+}
+.vertical_item:active{
+    background-color: #0000ff;
+}
+.vertical_item:active a{
+    color: white;
+}
+@media only screen and (max-width: 700px) {
+    .items{
+        display: flex;
+    }
+    .cate_pc{
+        display: none;
+    }
+}

@@ -1,0 +1,88 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.main{
+    display: inline-block;
+    width: 100vw;
+    height: 100vh;
+    object-fit: contain;
+}
+.heading_div{
+    width: 80%;
+    margin: 1% 5%;
+}
+.heading_div>p{
+    color: black;
+    font-size: 2rem;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
+    font-weight: bold;
+}
+.form{
+    width: 60%;
+    height: 60vh;
+    margin: auto 20%;
+}
+.form_div{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: inline-block;
+    overflow: hidden;
+    scroll-behavior: smooth;
+}
+#form_div{
+    border: .5px solid darkgrey;
+    box-shadow: 1px 1px 5px 1px darkgrey;
+    width: 60%;
+    height: auto;
+    margin: 1% 20%;
+    display: flex;
+}
+#sec1{
+    width: 90%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+#sec2{
+    width: 90%;
+    height: 100%;
+}
+.sub_link{
+    margin:1% 2%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+.sub_link>a{
+    color: #000080;
+    font-size: 1.4rem;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    position: relative;
+    left: -20%;
+    transition: all .2s;
+}
+.sub_link>a:hover{
+    color: #3466fc;
+}
+.account_input{
+    height: 20px;
+    margin: 0;
+}
+#submit_btn{
+    background-color:#000080;
+    transition: all .2s;
+}
+#submit_btn:hover{
+    background-color: #3466fc;
+}
+@media only screen and (max-width: 450px) {
+    #form_div{
+        width: 90%;
+        margin: auto 5%;
+    }
+  }

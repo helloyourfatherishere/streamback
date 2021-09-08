@@ -1,0 +1,155 @@
+    /* The side navigation menu */
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+  .sidenav {
+  height: 100vh; /* 100% Full-height */
+  width: auto; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  right: 0;
+  background-color: white; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  }
+  .sidenav>ul{
+      margin: auto 2%;
+  }
+  .sidenav>ul>li{
+      color: black;
+      list-style:none;
+      font-size: 1.5rem;
+      text-align: left;
+      cursor: pointer;
+      margin: 4% 6%;
+      border-bottom: 1px solid #F0F0F0;
+      transition: all .2s ease;
+      user-select: none;
+  }
+  .sidenav>ul>li>ul{
+      display: none;
+  }
+  .sidenav>ul>li>ul>a{
+      color: black;
+  }
+  .sidenav>ul>li>ul>a{
+      color:black;
+  }
+  .sidenav>ul>li>ul>a:hover{
+      background-color: #DCDCDC;
+      color: black;
+  }
+  .sidenav>ul>li>ul>a>li{
+      font-size: 1.1rem;
+      list-style: none;
+  }
+  .sidenav>ul>li:hover ul, .sidenav>ul>li:focus ul{
+      display: block;
+  }
+  
+  /* The navigation menu links */
+  .sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 2rem;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+  user-select: none;
+  }
+
+  /* When you mouse over the navigation links, change their color */
+  .sidenav a:hover {
+      color: red;
+  }
+
+  /* Position and style the close button (top right corner) */
+  .sidenav{
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 40px;
+  margin-left: 5px;
+  }
+
+  /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+  #main {
+  transition: margin-left .5s;
+  padding: 20px;
+  }
+  #close_btn {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+    user-select: none;
+    cursor: pointer;
+    background-color: none;
+  }
+  #close_btn:hover{
+    color: red;
+    background-color: transparent;
+  } 
+  .category_options{
+    color: black;
+    list-style:none;
+    font-size: 1.5rem;
+    text-align: left;
+    cursor: pointer;
+    margin: 4% 6%;
+    border-bottom: 1px solid #F0F0F0;
+    transition: all .2s ease;
+    user-select: none;
+  }
+  .category_options>li{
+      color: black;
+      font-size: 1.5rem;
+      text-transform: capitalize;
+  }
+  .brand{
+      padding: 2% 10%;
+  }
+  .category_options:hover{
+    background-color: #DCDCDC;
+    color: black;
+  }
+  .brands_more_arrow{
+      font-size: 1.4rem;
+      font-weight: bold;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      transition: all .3s;
+  }
+  .brands_more_arrow_down{
+      display: none;
+      font-size: 1.4rem;
+      font-weight: bold;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      transition: all .3s;
+  }
+  .brand:hover .brands_more_arrow{
+      display: none;
+  }
+  .brand:hover .brands_more_arrow_down{
+      display: inline-block;
+  }
+
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-width: 550px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+  #cate{
+      width: 50%;
+  }
+  }
+  .icon{
+    position:absolute;
+    display: inline-block;
+    right: 10px;
+    font-size: 20px;
+    user-select: none;
+    cursor: pointer;
+  }
