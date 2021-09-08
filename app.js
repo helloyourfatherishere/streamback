@@ -1,7 +1,7 @@
 //REQUIRE MODULES
 var express= require("express");
 var app= express();
-var port= 4000 || process.env.PORT;  
+var port= process.env.PORT || 4000;  
 var path= require("path");
 var fs= require("fs");
 var hbs= require("hbs");
