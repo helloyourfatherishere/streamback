@@ -298,10 +298,6 @@ app.get("/b/:brand_name", (req, res)=>{
     cate();
 });
 
-app.get("/create-account", (req, res)=>{
-    res.render("create-account")
-})
-
 app.post("/signup", (req, res)=>{
     var add= async function(){
         try{
