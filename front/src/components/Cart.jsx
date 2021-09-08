@@ -37,7 +37,11 @@ const Cart = () => {
     useEffect(()=>{
         var findCart= async function(){
             try{
-                let data= await fetch("/u/cart");
+                let data= await fetch("/u/cart",{
+                    method: 'POST',
+                    headers:{"Content-Type": "application/json"},
+                    body:""
+                });
                 let verify= await fetch("/verify_user");
                 let v=await verify.json();
                 let res= await data.json();
