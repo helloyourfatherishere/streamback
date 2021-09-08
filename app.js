@@ -329,10 +329,6 @@ app.post("/signup", (req, res)=>{
     add();
 })
 
-app.get("/login", (req, res)=>{
-    res.render("login");
-})
-
 app.post("/signin", (req, res)=>{
     var {email, pass}= req.body;
     var findUser= async function(){
@@ -364,21 +360,21 @@ app.post("/signin", (req, res)=>{
     findUser();
 });
 
-app.get("/forgot/:cate", (req, res)=>{
-    var cate= req.params.cate;
-    if(cate=="pass"){
-        res.render("forgot", {cate: cate, placeholder: "enter four digits code"})
-    }
-    else{
-        let token= req.cookies.jwt;
-        if(!token || token== null || token== undefined ||token.length == 0){
-            res.redirect("/login")
-        }
-        else{
-            res.render("forgot", {cate: cate, placeholder: "enter your password"})
-        }
-    }
-})
+// app.get("/forgot/:cate", (req, res)=>{
+//     var cate= req.params.cate;
+//     if(cate=="pass"){
+//         res.render("forgot", {cate: cate, placeholder: "enter four digits code"})
+//     }
+//     else{
+//         let token= req.cookies.jwt;
+//         if(!token || token== null || token== undefined ||token.length == 0){
+//             res.redirect("/login")
+//         }
+//         else{
+//             res.render("forgot", {cate: cate, placeholder: "enter your password"})
+//         }
+//     }
+// })
 app.post("/forgot/:cate", (req, res)=>{
       var findUserSecurity= async function(){
           let cate= req.params.cate;
