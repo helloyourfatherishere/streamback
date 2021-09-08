@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React,{useEffect, Component} from 'react'
 import "../css/snackBar.css"
 const SnackBar = ({message}) => {
       useEffect(()=>{

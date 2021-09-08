@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, Component} from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';

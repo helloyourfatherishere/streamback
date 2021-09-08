@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {useHistory} from "react-router-dom"
 import "../css/more.css"
 import SnackBar from './SnackBar';

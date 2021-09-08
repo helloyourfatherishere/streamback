@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{Component} from 'react'
 import SimpleImageSlider from "react-simple-image-slider";
 
 const Slider = ({value}) => {

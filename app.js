@@ -33,10 +33,6 @@ app.use(cookieParser());
 app.set("view engine", "hbs")
 app.set("views", views_path)
 
-//GLOBAL VARIABLES
-function ab(){
-    console.log("REACHED")
-};
 //ROUTES
 app.get("/api", (req, res)=>{
     var find = async function(){

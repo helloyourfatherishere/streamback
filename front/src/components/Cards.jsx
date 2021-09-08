@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{Component} from 'react'
 import StarIcon from '@material-ui/icons/Star';
 import StarHalfIcon from '@material-ui/icons/StarHalf';
 
