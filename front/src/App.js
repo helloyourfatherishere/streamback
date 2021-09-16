@@ -1,5 +1,5 @@
 import React from "react";
-import {Route, Switch} from "react-router-dom";
+import {Route, HashRouter as Router} from "react-router-dom";
 import Index from "./components/Index.jsx"
 import Search from "./components/Search.jsx"
 import CategoryView from "./components/CategoryView.jsx";
@@ -17,7 +17,7 @@ var err_message= "you have just rentered an invalid url.. this page does not exi
 function App() {
   return (
           <>
-          <Switch>
+          <Router>
             <Route exact path="/" component={Index}></Route>
             <Route exact path="/search/" component={Search}></Route>
             <Route exact path="/category/:cate" component={CategoryView}></Route>
@@ -31,7 +31,7 @@ function App() {
             <Route exact path="/view/:id" component={View}></Route>
             <Route exact path="/n" component={Images}></Route>
             <Route exact path="*" render={()=>{return(<Error message={err_message} valid={true}></Error>)}}></Route>
-          </Switch>
+          </Router>
           </>
   )
 }
