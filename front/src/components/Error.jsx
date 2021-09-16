@@ -1,4 +1,4 @@
-import React,{useState, useEffect,Component} from 'react'
+import React,{useState, useEffect} from 'react'
 import { NavLink } from 'react-router-dom'
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import Nav from './Nav';

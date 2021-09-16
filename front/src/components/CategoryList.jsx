@@ -1,4 +1,4 @@
-import React,{useState, useEffect, Component} from 'react'
+import React,{useState, useEffect} from 'react'
 import "../css/category.css"
 import DragHandleOutlinedIcon from '@material-ui/icons/DragHandleOutlined';
 import ClearAllOutlinedIcon from '@material-ui/icons/ClearAllOutlined';

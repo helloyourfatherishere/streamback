@@ -1,4 +1,4 @@
-import React,{useState, useEffect, Component} from 'react'
+import React,{useState, useEffect} from 'react'
 import {useHistory, useParams} from "react-router-dom"
 import Nav from "./Nav.jsx"
 import "../css/order.css"

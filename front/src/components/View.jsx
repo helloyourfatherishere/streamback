@@ -1,4 +1,4 @@
-import React, {useState, useEffect, Component} from 'react'
+import React, {useState, useEffect} from 'react'
 import {useParams, useHistory} from "react-router-dom"
 import "../css/view.css"
 import Cards from "./Cards.jsx"

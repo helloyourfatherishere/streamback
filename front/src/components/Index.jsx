@@ -1,4 +1,4 @@
-import  {useState,useEffect, Component} from "react";
+import  {useState,useEffect} from "react";
 import "../css/card.css";
 import "../css/poster.css"
 import Nav from "./Nav"

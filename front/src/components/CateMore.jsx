@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 

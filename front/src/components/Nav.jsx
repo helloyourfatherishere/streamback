@@ -1,4 +1,4 @@
-import React,{useEffect, useState, Component} from 'react'
+import React,{useEffect, useState} from 'react'
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
