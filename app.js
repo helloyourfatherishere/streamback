@@ -909,13 +909,13 @@ app.post("/feed/:sub", (req, res)=>{
     feedandComments();
 })
 
-if(process.env.NODE_ENV === "production"){
-    app.use(express.static("sfront/build"))
-}
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '/front/build/index.html'));
+  });
 
-else {
-    app.use(express.static(path.join(__dirname, '/client/public')));
-  }
+if(process.env.NODE_ENV === "production"){
+    app.use(express.static("front/build"))
+}
 
 app.listen(port, ()=>{
     console.log(`connected at port no ${port}`)
