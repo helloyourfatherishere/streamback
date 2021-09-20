@@ -910,8 +910,12 @@ app.post("/feed/:sub", (req, res)=>{
 })
 
 if(process.env.NODE_ENV === "production"){
-    app.use(express.static("./front/build"))
+    app.use(express.static("sfront/build"))
 }
+
+else {
+    app.use(express.static(path.join(__dirname, '/client/public')));
+  }
 
 app.listen(port, ()=>{
     console.log(`connected at port no ${port}`)
