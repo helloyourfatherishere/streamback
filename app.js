@@ -37,6 +37,9 @@ app.set("views", views_path)
 //GLOBAL VARIABLES
 
 //ROUTES
+app.get("/", (req, res)=>{
+    res.send("HELLO")
+})
 app.get("/api", (req, res)=>{
     var find = async function(){
         try{
