@@ -1,7 +1,7 @@
 //REQUIRE MODULES
 var express= require("express");
 var app= express();
-var port= process.env.PORT || 4000;  
+var port= 4000 || process.env.PORT;  
 var path= require("path");
 var fs= require("fs");
 var hbs= require("hbs");
@@ -10,6 +10,7 @@ var cookieParser = require("cookie-parser");
 require("dotenv").config();
 var bcrypt= require("bcryptjs");
 var jwt= require("jsonwebtoken");
+
 //DB THINGS
 require("./db/db.js");
 var main= require("./public/models/main.js")
@@ -32,6 +33,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.set("view engine", "hbs")
 app.set("views", views_path)
+
+//GLOBAL VARIABLES
 
 //ROUTES
 app.get("/api", (req, res)=>{
@@ -145,8 +148,8 @@ app.post("/searched", (req, res)=>{
     var f= async function(){
 		try{
             var query= req.body.values.toLowerCase();
-            var findLocal= await product.find({$and:[{visiblity: true},{$or: [{category:{$regex: query}},{keywords: {$regex: query}}, {title: {$regex: query}}]}]}).limit(30).sort({data: -1})
-            var findBrand= await product.find({$and:[{visiblity: true},{$or: [{keywords: {$regex: query}}, {title: {$regex: query}}, {category:{$regex: query}}]}]}).limit(20).sort({data: -1})
+            var findLocal= await product.find({$and:[{visiblity: true}, {brand: false},{$or: [{keywords: {$regex: query}}, {title: {$regex: query}}, {category:{$regex: query}}]}]}).limit(30).sort({data: -1})
+            var findBrand= await product.find({$and:[{visiblity: true}, {brand: true},{$or: [{keywords: {$regex: query}}, {title: {$regex: query}}, {category:{$regex: query}}]}]}).limit(20).sort({data: -1})
             console.log(`BRAND ${findBrand.length}`);
             console.log(`local ${findLocal.length}`)
             // res.render("search", {
@@ -187,53 +190,37 @@ app.post("/searched", (req, res)=>{
 // 		}
 // 	});
 // })
-app.get("/views/:id", (req, res)=>{
+app.get("/view/:id", (req, res)=>{
     var findData= async function(){
-        try{
-            var dataFind= await product.findOne({$and:[{_id: req.params.id}, {visiblity: true}]});
-            console.log(dataFind)
-            if(dataFind !== null){
-                var dataObj= 
-                    {
-                        images: dataFind.images,
-                        brand_name: dataFind.brand_name,
-                        keywords: dataFind.keywords,
-                        date: dataFind.date,
-                        comments: dataFind.comments,
-                        _id: dataFind._id,
-                        title: dataFind.title,
-                        price: dataFind.price,
-                        cut_price: dataFind.cut_price,
-                        sell_price: dataFind.sell_price,
-                        permission: dataFind.permission,
-                        sell: dataFind.sell,
-                        discount: dataFind.discount,
-                        brand: dataFind.brand,
-                        table: dataFind.table,
-                        des: dataFind.des,
-                        note: dataFind.note,
-                        main_img: dataFind.main_img,
-                        type: dataFind.type,
-                        sizes: dataFind.sizes,
-                        colors: dataFind.colors
-                      }
-                      var query= [dataFind.keywords];
-                      var i=query.map((val, ind)=>{
-                          return( new RegExp(val))
-                      })
-                      var relatedProduct= await product.find({$and: [{keywords: {$in: i}}, {brand: true}]}).sort({data: -1}).limit(15);
-                      res.send({data: dataObj, more: relatedProduct, find: true})
-                    // res.render("view",{data: dataObj, more: relatedProduct})
-
-            }
-            else{
-                res.send({data: {},more: [], find: null})
-
-            }
-        }
-        catch{
-            (e)=>{console.log(e)}
-        }
+        var dataFind= await product.findOne({_id: req.params.id});
+        console.log(dataFind)
+        var dataObj= 
+            {
+                images: dataFind.images,
+                brand_name: dataFind.brand_name,
+                keywords: dataFind.keywords,
+                date: dataFind.date,
+                comments: dataFind.comments,
+                _id: dataFind._id,
+                title: dataFind.title,
+                price: dataFind.price,
+                cut_pcice: dataFind.cut_pcice,
+                sell_price: dataFind.sell_price,
+                permission: dataFind.permission,
+                sell: dataFind.sell,
+                brand: dataFind.brand,
+                table: dataFind.table,
+                des: dataFind.des,
+                note: dataFind.note,
+                main_img: dataFind.main_img
+              }
+              var query= [dataFind.keywords];
+              var i=query.map((val, ind)=>{
+                  return( new RegExp(val))
+              })
+            
+              var relatedProduct= await product.find({$and: [{keywords: {$in: i}}, {brand: true}]}).sort({data: -1}).limit(10);
+              res.render("view", {data: dataObj, more: relatedProduct})
     };
     findData();
 })
@@ -294,6 +281,10 @@ app.get("/b/:brand_name", (req, res)=>{
     cate();
 });
 
+app.get("/create-account", (req, res)=>{
+    res.render("create-account")
+})
+
 app.post("/signup", (req, res)=>{
     var add= async function(){
         try{
@@ -323,6 +314,10 @@ app.post("/signup", (req, res)=>{
         }
     };
     add();
+})
+
+app.get("/login", (req, res)=>{
+    res.render("login");
 })
 
 app.post("/signin", (req, res)=>{
@@ -356,21 +351,21 @@ app.post("/signin", (req, res)=>{
     findUser();
 });
 
-// app.get("/forgot/:cate", (req, res)=>{
-//     var cate= req.params.cate;
-//     if(cate=="pass"){
-//         res.render("forgot", {cate: cate, placeholder: "enter four digits code"})
-//     }
-//     else{
-//         let token= req.cookies.jwt;
-//         if(!token || token== null || token== undefined ||token.length == 0){
-//             res.redirect("/login")
-//         }
-//         else{
-//             res.render("forgot", {cate: cate, placeholder: "enter your password"})
-//         }
-//     }
-// })
+app.get("/forgot/:cate", (req, res)=>{
+    var cate= req.params.cate;
+    if(cate=="pass"){
+        res.render("forgot", {cate: cate, placeholder: "enter four digits code"})
+    }
+    else{
+        let token= req.cookies.jwt;
+        if(!token || token== null || token== undefined ||token.length == 0){
+            res.redirect("/login")
+        }
+        else{
+            res.render("forgot", {cate: cate, placeholder: "enter your password"})
+        }
+    }
+})
 app.post("/forgot/:cate", (req, res)=>{
       var findUserSecurity= async function(){
           let cate= req.params.cate;
@@ -480,7 +475,7 @@ app.get("/verify_user", (req, res)=>{
     }
     res.send({verify_user: verify_user})
 });
-app.post("/u/cart", (req, res)=>{
+app.get("/u/cart", (req, res)=>{
     let token= req.cookies.jwt;
     console.log(req.cookies.jwt)
     if(!token || token== null || token== undefined ||token.length == 0){
@@ -534,7 +529,7 @@ app.post("/addtocart/:id", (req, res)=>{
                 return val==productId
             });
             if(verifyCart){
-                res.send({status: false, type: 'added'})
+                res.send("ALREADY ADDED")
             }
             else{
                 let cart= findUser.cart=findUser.cart.concat(productId);
@@ -546,7 +541,7 @@ app.post("/addtocart/:id", (req, res)=>{
                     });
                 var userSave=await findUser.save(); 
                 var save=await addCartDB.save();
-                res.send({status: true, type: 'add'})
+                res.send("ADDED TO CART")
             }
             }
             catch{
@@ -556,7 +551,7 @@ app.post("/addtocart/:id", (req, res)=>{
         findUserANdToken();
     }
     else{
-        res.send({status: false, type: 'login'})
+        res.redirect("/login");
     }
 });
 
@@ -599,14 +594,13 @@ app.get("/u/order", (req, res)=>{
             let order= findUser.order
             let c;
             let a=[];
-            console.log(order.length)
-            for (let i=0; i<order.length; i++){
+            for (let i=0; i<=order.length; i++){
                 let findO= async function(a){
                     try{
                         let o=order[i]
                         let index=i+1
                         let findOrder= await orderDB.findOne({_id: o});
-                        console.log(`findOrder ${i} ${o} ${findOrder}`)
+                        console.log(`findOrder ${findOrder}`)
                         let arr=a.push(findOrder)
                         if(index===order.length){
                             let c= a
@@ -721,7 +715,7 @@ app.post("/order/unregistered", (req, res)=>{
                 });
                 let result = await insert.save();
                 console.log(result)
-                res.send(false)
+                res.send("YOUR ORDER WILL BE SUBMITTED AFTER CONFIRMING IT BY YOUR GIVEN INFORMATION KEEP UPDATED AND HAPP SHOPPING")
             }
             catch{
                 (e)=>{
@@ -765,7 +759,7 @@ app.post("/order/unregistered", (req, res)=>{
             let ab=await placeOrder.save();
             let o = findUser.order=findUser.order.concat(ab._id);
             let s= await findUser.save();
-            res.send(true)
+            res.redirect(`/view/${id}`)
             };
             addProductRegister();
         }
@@ -791,7 +785,7 @@ app.get("/logout", (req, res)=>{
                     new: true, useFindAndModify: false
                 });
                 res.cookie("jwt", "");
-                res.send("true")
+                res.redirect("/")
                 }
             }
             catch{
@@ -804,11 +798,11 @@ app.get("/logout", (req, res)=>{
 
 app.post("/comment/:id", (req, res)=>{
     var comment= async function(){
-        let com= req.body.comment
+        let com= JSON.stringify(req.body.comment)
         try{
             let token= req.cookies.jwt;
             if(!token || token== undefined || token == null || token.length==0){
-                res.send(false)
+                res.redirect("/login")
             }
             else{  
                  var verify=  jwt.verify(token, process.env.KEY);
@@ -821,9 +815,9 @@ app.post("/comment/:id", (req, res)=>{
                             let name= u.name;
                             let comment= com;
                             let findProduct= await product.findOne({_id: productId});
-                            let productComment= findProduct.comments= findProduct.comments.concat({name: name, comment: com})
+                            let productComment= findProduct.comments= findProduct.comments.concat({name: name, comment: comment})
                             let a=await findProduct.save();
-                            res.send(true)
+                            res.redirect(`/view/${productId}`)
                         }
                         catch{
                             (e)=>{console.log(e)}
@@ -832,7 +826,7 @@ app.post("/comment/:id", (req, res)=>{
                      f();
                 }
                 else{
-                        res.send(false)
+                res.redirect("/login")
                 }
                 
             }
@@ -841,12 +835,11 @@ app.post("/comment/:id", (req, res)=>{
             (e)=>{console.log(e)}
         }
     };
-    comment(); 
+    comment();  
 });
 
 app.get("/u/recieved", (req, res)=>{
     let token= req.cookies.jwt;
-    console.log(token)
     if(!token || token== null || token== undefined ||token.length==0){
         res.send(false)
     }
@@ -858,15 +851,15 @@ app.get("/u/recieved", (req, res)=>{
             let recieved= findUser.received;
             let c;
             let a=[];
-            for (let i=0; i<recieved.length; i++){
+            for (let i=0; i<=recieved.length; i++){
                 let find= async function(a){
                     try{
                         let index=i+1
                         var findDelievered= await delieveredDB.findOne({_id:recieved[i]}).sort({date: -1});
-                        console.log(findDelievered)
                         let arr=a.push(findDelievered)
                         if(index===recieved.length){
                             let c= a
+                            console.log(c)
                             if(c || c!==null || c!==undefined){
                                 res.send({product: c})            }
                             else{
@@ -891,7 +884,7 @@ app.get("/u/recieved", (req, res)=>{
 app.post("/feed/:sub", (req, res)=>{
     var feedandComments= async function(){
         try{
-            let sub= req.params.sub;
+            let sub= req.params.for;
             let {email, message}= req.body;
             let feedData= new feed({
                 email: email,
@@ -908,13 +901,6 @@ app.post("/feed/:sub", (req, res)=>{
     };
     feedandComments();
 })
-
-
-
-if(process.env.NODE_ENV === "production"){
-    app.use(express.static("front/build"))
-}
-
 app.listen(port, ()=>{
     console.log(`connected at port no ${port}`)
 })

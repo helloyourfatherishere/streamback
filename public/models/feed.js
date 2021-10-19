@@ -5,7 +5,7 @@ var feedSchema= new mongoose.Schema({
         type: Object
     },
     message: {
-        type: String
+        type: Array
     },
     sub:{
         type: String
