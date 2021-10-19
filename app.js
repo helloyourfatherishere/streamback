@@ -284,9 +284,9 @@ app.get("/b/:brand_name", (req, res)=>{
     cate();
 });
 
-app.get("/create-account", (req, res)=>{
-    res.render("create-account")
-})
+// app.get("/create-account", (req, res)=>{
+//     res.render("create-account")
+// })
 
 app.post("/signup", (req, res)=>{
     var add= async function(){
@@ -319,9 +319,9 @@ app.post("/signup", (req, res)=>{
     add();
 })
 
-app.get("/login", (req, res)=>{
-    res.render("login");
-})
+// app.get("/login", (req, res)=>{
+//     res.render("login");
+// })
 
 app.post("/signin", (req, res)=>{
     var {email, pass}= req.body;
