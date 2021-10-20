@@ -207,7 +207,7 @@ app.get("/view/:id", (req, res)=>{
                 _id: dataFind._id,
                 title: dataFind.title,
                 price: dataFind.price,
-                cut_pcice: dataFind.cut_price,
+                cut_price: dataFind.cut_price,
                 sell_price: dataFind.sell_price,
                 permission: dataFind.permission,
                 sell: dataFind.sell,
