@@ -34,7 +34,8 @@ app.use(cookieParser());
 app.set("view engine", "hbs")
 app.set("views", views_path)
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*")
+    res.header({"Access-Control-Allow-Origin": "*"});
+    next();
   }) 
 //GLOBAL VARIABLES
 
