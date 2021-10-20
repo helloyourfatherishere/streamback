@@ -46,7 +46,7 @@ app.get("/", (req, res)=>{
 app.post("/api", (req, res)=>{
     var find = async function(){
         try{
-            console.log(Req.body)
+            console.log(req.body)
             let token= req.cookies.jwt;
             let user;
             if(!token || token== null || token== undefined ||token.length == 0){
