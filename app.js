@@ -215,7 +215,10 @@ app.get("/view/:id", (req, res)=>{
                 table: dataFind.table,
                 des: dataFind.des,
                 note: dataFind.note,
-                main_img: dataFind.main_img
+                main_img: dataFind.main_img,
+                type: dataFind.type,
+                sizes: dataFind.sizes,
+                colors: dataFind.colors
               }
               var query= [dataFind.keywords];
               var i=query.map((val, ind)=>{
