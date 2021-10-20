@@ -52,6 +52,7 @@ app.get("/api", (req, res)=>{
                 user=true
             }
         let main_data= await main.findOne({});
+        console.log(main_data)
         let poster= main_data.poster;
         let pants = await product.find({$and: [{category: "pants"}, {brand: false}, {visiblity: true}]}).sort({date: -1}).limit(10);
         let shirts = await product.find({$and: [{category: "shirts"}, {brand: false}, {visiblity: true}]}).sort({date: -1}).limit(10);
@@ -196,7 +197,6 @@ app.post("/searched", (req, res)=>{
 app.get("/view/:id", (req, res)=>{
     var findData= async function(){
         var dataFind= await product.findOne({_id: req.params.id});
-        console.log(dataFind)
         var dataObj= 
             {
                 images: dataFind.images,
