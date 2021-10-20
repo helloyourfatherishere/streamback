@@ -43,7 +43,7 @@ app.use((req, res, next) => {
 app.get("/", (req, res)=>{
     res.send("HELLO")
 })
-app.get("/api", (req, res)=>{
+app.post("/api", (req, res)=>{
     var find = async function(){
         try{
             let token= req.cookies.jwt;
