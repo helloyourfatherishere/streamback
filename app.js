@@ -43,7 +43,7 @@ app.use((req, res, next) => {
 app.get("/", (req, res)=>{
     res.send("HELLO")
 })
-app.post("/api", (req, res)=>{
+app.get("/api", (req, res)=>{
     var find = async function(){
         try{
             console.log(req.body)
