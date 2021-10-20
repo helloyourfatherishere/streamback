@@ -44,9 +44,9 @@ app.get("/", (req, res)=>{
     res.send("HELLO")
 })
 app.post("/api", (req, res)=>{
-    console.log("RACEHED")
     var find = async function(){
         try{
+            console.log(Req.body)
             let token= req.cookies.jwt;
             let user;
             if(!token || token== null || token== undefined ||token.length == 0){
