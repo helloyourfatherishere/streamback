@@ -222,8 +222,9 @@ app.get("/view/:id", (req, res)=>{
                   return( new RegExp(val))
               })
             
-              var relatedProduct= await product.find({$and: [{keywords: {$in: i}}, {brand: true}]}).sort({data: -1}).limit(10);
-              res.render("view", {data: dataObj, more: relatedProduct})
+              var relatedProduct= await product.find({$and: [{keywords: {$in: i}}, {brand: true}]}).sort({data: -1}).limit(15);
+              res.send({data: dataObj, more: relatedProduct, find: true})
+            //   res.render("view", {data: dataObj, more: relatedProduct})
     };
     findData();
 })
