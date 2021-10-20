@@ -56,7 +56,6 @@ app.get("/api", (req, res)=>{
                 user=true
             }
         let main_data= await main.findOne({});
-        console.log(main_data)
         let poster= main_data.poster;
         let pants = await product.find({$and: [{category: "pants"}, {brand: false}, {visiblity: true}]}).sort({date: -1}).limit(10);
         let shirts = await product.find({$and: [{category: "shirts"}, {brand: false}, {visiblity: true}]}).sort({date: -1}).limit(10);
