@@ -536,7 +536,7 @@ app.post("/addtocart/:id", (req, res)=>{
                 return val==productId
             });
             if(verifyCart){
-                res.send("ALREADY ADDED")
+                res.send({status: false, type: 'added'})
             }
             else{
                 let cart= findUser.cart=findUser.cart.concat(productId);
@@ -548,7 +548,7 @@ app.post("/addtocart/:id", (req, res)=>{
                     });
                 var userSave=await findUser.save(); 
                 var save=await addCartDB.save();
-                res.send("ADDED TO CART")
+                res.send({status: true, type: 'add'})
             }
             }
             catch{
