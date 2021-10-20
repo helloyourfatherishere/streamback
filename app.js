@@ -478,7 +478,7 @@ app.get("/verify_user", (req, res)=>{
     }
     res.send({verify_user: verify_user})
 });
-app.get("/u/cart", (req, res)=>{
+app.post("/u/cart", (req, res)=>{
     let token= req.cookies.jwt;
     console.log(req.cookies.jwt)
     if(!token || token== null || token== undefined ||token.length == 0){
