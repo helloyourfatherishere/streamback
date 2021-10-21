@@ -159,7 +159,6 @@ app.post("/search", (req, res)=>{
             var findLocal= await product.find({$and:[{visiblity: true}, {$or: [{keywords: {$regex: query}}, {title: {$regex: query}}, {category:{$regex: query}}]}]}).limit(30).sort({data: -1})
             var findBrand= ""
             console.log(findLocal)
-            console.log(`BRAND ${findBrand.length}`);
             // res.render("search", {
             //     local: findLocal,
             //     brand: findBrand
