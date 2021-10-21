@@ -151,7 +151,7 @@ app.get("/api", (req, res)=>{
 //         }
 //     };findCategory();
 // })
-app.get("/search", (req, res)=>{
+app.post("/search", (req, res)=>{
     console.log(req.body)
     var f= async function(){
 		try{
