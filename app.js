@@ -155,17 +155,16 @@ app.post("/search", (req, res)=>{
     console.log(req.body)
     var f= async function(){
 		try{
-            // var query= req.body.values.toLowerCase();
-            // var findLocal= await product.find({$and:[{visiblity: true}, {$or: [{keywords: {$regex: query}}, {title: {$regex: query}}, {category:{$regex: query}}]}]}).limit(30).sort({data: -1})
-            // var findBrand= ""
-            // console.log(findLocal)
-            // console.log(`BRAND ${findBrand.length}`);
-            // // res.render("search", {
-            // //     local: findLocal,
-            // //     brand: findBrand
-            // // });
-            // res.send({findLocal, findBrand})
-            res.send(req.body)
+            var query= req.body.values.toLowerCase();
+            var findLocal= await product.find({$and:[{visiblity: true}, {$or: [{keywords: {$regex: query}}, {title: {$regex: query}}, {category:{$regex: query}}]}]}).limit(30).sort({data: -1})
+            var findBrand= ""
+            console.log(findLocal)
+            console.log(`BRAND ${findBrand.length}`);
+            // res.render("search", {
+            //     local: findLocal,
+            //     brand: findBrand
+            // });
+            res.send({findLocal, findBrand})
 		}catch{
 			(e)=>{
 				console.log(e);
