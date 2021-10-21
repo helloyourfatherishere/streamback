@@ -152,7 +152,7 @@ app.get("/api", (req, res)=>{
 //     };findCategory();
 // })
 app.post("/searched", (req, res)=>{
-    console.log(req.body.values)
+    console.log(req.body)
     var f= async function(){
 		try{
             var query= req.body.values.toLowerCase();
