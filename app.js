@@ -155,7 +155,8 @@ app.get("/search", (req, res)=>{
     console.log(req.body)
     var f= async function(){
 		try{
-            var query= req.body.values.toLowerCase();
+            // var query= req.body.values.toLowerCase();
+            var query= "abc"
             var findLocal= await product.find({$and:[{visiblity: true}, {$or: [{keywords: {$regex: query}}, {title: {$regex: query}}, {category:{$regex: query}}]}]}).limit(30).sort({data: -1})
             var findBrand= ""
             console.log(findLocal)
