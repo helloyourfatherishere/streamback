@@ -151,7 +151,7 @@ app.get("/api", (req, res)=>{
 //         }
 //     };findCategory();
 // })
-app.post("/searched", (req, res)=>{
+app.post("/search", (req, res)=>{
     console.log(req.body)
     var f= async function(){
 		try{
@@ -160,7 +160,6 @@ app.post("/searched", (req, res)=>{
             var findBrand= ""
             console.log(findLocal)
             console.log(`BRAND ${findBrand.length}`);
-            console.log(`local ${findLocal.length}`)
             // res.render("search", {
             //     local: findLocal,
             //     brand: findBrand
