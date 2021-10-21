@@ -152,9 +152,9 @@ app.get("/api", (req, res)=>{
 //     };findCategory();
 // })
 app.post("/searched", (req, res)=>{
+    console.log(req.body.values)
     var f= async function(){
 		try{
-            console.log(req.body)
             var query= req.body.values.toLowerCase();
             var findLocal= await product.find({$and:[{visiblity: true}, {$or: [{keywords: {$regex: query}}, {title: {$regex: query}}, {category:{$regex: query}}]}]}).limit(30).sort({data: -1})
             var findBrand= ""
