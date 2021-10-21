@@ -154,9 +154,10 @@ app.get("/api", (req, res)=>{
 app.post("/searched", (req, res)=>{
     var f= async function(){
 		try{
+            console.log(req.body)
             var query= req.body.values.toLowerCase();
-            var findLocal= await product.find({$and:[{visiblity: true}, {brand: false},{$or: [{keywords: {$regex: query}}, {title: {$regex: query}}, {category:{$regex: query}}]}]}).limit(30).sort({data: -1})
-            var findBrand= await product.find({$and:[{visiblity: true}, {brand: true},{$or: [{keywords: {$regex: query}}, {title: {$regex: query}}, {category:{$regex: query}}]}]}).limit(20).sort({data: -1})
+            var findLocal= await product.find({$and:[{visiblity: true}, {$or: [{keywords: {$regex: query}}, {title: {$regex: query}}, {category:{$regex: query}}]}]}).limit(30).sort({data: -1})
+            var findBrand= ""
             console.log(`BRAND ${findBrand.length}`);
             console.log(`local ${findLocal.length}`)
             // res.render("search", {
