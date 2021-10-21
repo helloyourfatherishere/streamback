@@ -152,10 +152,9 @@ app.get("/api", (req, res)=>{
 //     };findCategory();
 // })
 app.post("/search", (req, res)=>{
-    console.log(req.body)
     var f= async function(){
 		try{
-            var query= req.body.values.toLowerCase();
+            var query= req.body.values;
             var findLocal= await product.find({$and:[{visiblity: true}, {$or: [{keywords: {$regex: query}}, {title: {$regex: query}}, {category:{$regex: query}}]}]}).limit(30).sort({data: -1})
             var findBrand= ""
             console.log(findLocal)
@@ -167,7 +166,7 @@ app.post("/search", (req, res)=>{
 		}catch{
 			(e)=>{
 				console.log(e);
-				res.send("SOME ERROR IS OCCURED" + e)
+				res.send({e})
 			}
 		}
 		
