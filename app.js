@@ -560,7 +560,7 @@ app.post("/addtocart/:id", (req, res)=>{
         findUserANdToken();
     }
     else{
-        res.redirect("/login");
+        res.send(false);
     }
 });
 
