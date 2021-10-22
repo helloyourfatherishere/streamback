@@ -345,14 +345,14 @@ app.post("/signin", (req, res)=>{
                     httpOnly: true,
                     maxAge: 100* 10* 60 * 60 * 24 * 7 
                 });
-                res.send(true)
+                res.send({status: true})
             }
             else{
-                res.send(false)
+                res.send({status: false})
             }
             }
             else{
-                res.send(false)
+                res.send({status: false})
             }
         }
         catch{
