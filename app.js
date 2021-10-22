@@ -306,7 +306,6 @@ app.get("/b/:brand_name", (req, res)=>{
 // })
 
 app.post("/signup", (req, res)=>{
-    console.log(req)
     var add= async function(){
         try{
             console.log(req.body)
@@ -540,6 +539,7 @@ app.post("/addtocart/:id", (req, res)=>{
         var findUserANdToken= async function(){
             try{
             let productId=req.params.id;
+            console.log(productId)
             var verify=  jwt.verify(token, process.env.KEY);
                 
             var findUser= await user.findOne({_id: verify._id});
