@@ -331,7 +331,7 @@ app.post("/signup", (req, res)=>{
 // })
 
 app.post("/signin", (req, res)=>{
-    console.log(req.body)
+    console.log(req)
     var {email, pass}= req.body;
     var findUser= async function(){
         try{
@@ -345,14 +345,14 @@ app.post("/signin", (req, res)=>{
                     httpOnly: true,
                     maxAge: 100* 10* 60 * 60 * 24 * 7 
                 });
-                res.send({status: true})
+                res.send({status: true}).header(200)
             }
             else{
-                res.send({status: false})
+                res.send({status: false}).header(200)
             }
             }
             else{
-                res.send({status: false})
+                res.send({status: false}).header(200)
             }
         }
         catch{
