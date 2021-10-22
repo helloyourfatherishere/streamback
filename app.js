@@ -306,6 +306,7 @@ app.get("/b/:brand_name", (req, res)=>{
 // })
 
 app.post("/signup", (req, res)=>{
+    console.log(req)
     var add= async function(){
         try{
             console.log(req.body)
@@ -355,14 +356,14 @@ app.post("/signin", (req, res)=>{
                     httpOnly: true,
                     maxAge: 100* 10* 60 * 60 * 24 * 7 
                 });
-                res.send({status: true}).header(200)
+                res.send({status: true})
             }
             else{
-                res.send({status: false}).header(200)
+                res.send({status: false})
             }
             }
             else{
-                res.send({status: false}).header(200)
+                res.send({status: false})
             }
         }
         catch{
