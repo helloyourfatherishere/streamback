@@ -10,6 +10,7 @@ var cookieParser = require("cookie-parser");
 require("dotenv").config();
 var bcrypt= require("bcryptjs");
 var jwt= require("jsonwebtoken");
+var cors = require('cors');
 
 //DB THINGS
 require("./db/db.js");
@@ -37,6 +38,14 @@ app.use((req, res, next) => {
     res.header({"Access-Control-Allow-Origin": "*"});
     next();
   }) 
+  app.use(cors({
+    'allowedHeaders': ['sessionId', 'Content-Type'],
+    'exposedHeaders': ['sessionId'],
+    'origin': '*',
+    'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    'preflightContinue': false
+  }));
+  
 //GLOBAL VARIABLES
 
 //ROUTES
