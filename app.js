@@ -351,6 +351,7 @@ app.post("/signin", (req, res)=>{
             var compare= await bcrypt.compare(pass, data.pass);
             if(compare){
                 var token= await data.generate();
+                console.log(token)
                 res.cookie("jwt", token, {
                     httpOnly: true,
                     maxAge: 100* 10* 60 * 60 * 24 * 7 
