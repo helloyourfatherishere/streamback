@@ -331,6 +331,7 @@ app.post("/signup", (req, res)=>{
 // })
 
 app.post("/signin", (req, res)=>{
+    console.log(req.body)
     var {email, pass}= req.body;
     var findUser= async function(){
         try{
