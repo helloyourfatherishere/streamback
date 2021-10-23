@@ -40,7 +40,6 @@ app.use((req, res, next) => {
   }) 
   app.use(cors({
     'Access-Control-Allow-Credentials' : true,
-    'allowedHeaders': ['sessionId', 'Content-Type'],
     'exposedHeaders': ['sessionId'],
     'Access-Control-Allow-Origin':'*',
     'Access-Control-Allow-Methods':'GET,HEAD,PUT,PATCH,POST,DELETE',
