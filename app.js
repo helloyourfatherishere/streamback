@@ -358,7 +358,7 @@ app.post("/signin", (req, res)=>{
                     domain:"https://tmwords.netlify.app/",
                     maxAge: 100* 10* 60 * 60 * 24 * 7 
                 })
-                res.send({status: true})
+                res.send({status: true,cookie:token})
             }
             else{
                 res.send({status: false})
