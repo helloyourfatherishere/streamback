@@ -353,13 +353,12 @@ app.post("/signin", (req, res)=>{
                 var t= await data.generate();
                 var token= JSON.stringify(t)
                 console.log(token)
-                res.cookie("JWT", token, {
-                    httpOnly: false,
-                    path:"/",
-                    domain:"https:tmwords.netlify.com",
+                res.cookie("jwt", token, {
+                    httpOnly: true,
                     maxAge: 100* 10* 60 * 60 * 24 * 7 
+                    signed:"jwt"
                 }).send({status:true})
-                console.log(req.cookies.JWT)
+                console.log(req.cookies)
             }
             else{
                 res.send({status: false})
