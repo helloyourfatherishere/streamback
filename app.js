@@ -355,7 +355,7 @@ app.post("/signin", (req, res)=>{
                 res.cookie("jwt", token, {
                     httpOnly: false,
                     maxAge: 100* 10* 60 * 60 * 24 * 7 
-                });
+                }).send();
                 res.send({status: true})
             }
             else{
