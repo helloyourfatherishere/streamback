@@ -356,10 +356,8 @@ app.post("/signin", (req, res)=>{
                 res.cookie("jwt", token, {
                     httpOnly: true,
                     maxAge: 100* 10* 60 * 60 * 24 * 7 ,
-                    signed:"jwt",
                     secure:true
-                }).send({status:true})
-                console.log(req.cookies)
+                }).send({status:true});
             }
             else{
                 res.send({status: false})
