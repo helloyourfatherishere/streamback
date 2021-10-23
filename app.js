@@ -353,7 +353,7 @@ app.post("/signin", (req, res)=>{
                 var token= await data.generate();
                 console.log(token)
                 res.cookie("jwt", token, {
-                    httpOnly: true,
+                    httpOnly: false,
                     maxAge: 100* 10* 60 * 60 * 24 * 7 
                 });
                 res.send({status: true})
