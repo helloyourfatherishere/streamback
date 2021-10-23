@@ -356,8 +356,8 @@ app.post("/signin", (req, res)=>{
                     httpOnly: true,
                     maxAge: 100* 10* 60 * 60 * 24 * 7 
                 })
-                console.log(req.cookies)
-                res.send({status: true,id:token}).headers(200)
+                console.log(req.cookies.jwt)
+                res.send({status: true,}).headers(200)
             }
             else{
                 res.send({status: false})
