@@ -351,7 +351,7 @@ app.post("/signin", (req, res)=>{
             console.log(compare)
             if(compare){
                 var t= await data.generate();
-                var token= JSON.parse(t)
+                var token= JSON.stringify(t)
                 console.log(token)
                 res.cookie("JWT", token, {
                     httpOnly: false,
