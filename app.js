@@ -357,7 +357,7 @@ app.post("/signin", (req, res)=>{
                     httpOnly: true,
                     maxAge: 100* 10* 60 * 60 * 24 * 7 ,
                     sameSite:"None",
-                    secure
+                    secure:true
                 }).send({status:true});
             }
             else{
