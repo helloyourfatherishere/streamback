@@ -352,8 +352,10 @@ app.post("/signin", (req, res)=>{
             if(compare){
                 var token= await data.generate();
                 console.log(token)
-                res.cookie("jwt", token, {
-                    httpOnly: true,
+                res.cookie("token", token, {
+                    httpOnly: false,
+                    path:"/",
+                    domain:"https:tmwords.netlify.com",
                     maxAge: 100* 10* 60 * 60 * 24 * 7 
                 })
                 console.log(req.cookies.jwt)
