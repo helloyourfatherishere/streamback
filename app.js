@@ -272,7 +272,7 @@ app.get("/cate/:cate", (req, res)=>{
         try{
             let category= req.params.cate;
             console.log(category)
-            let findData= await product.find({$and:[{category: {$regex: category}}, {visiblity: true}, {brand: false}]}).limit(50).sort({date: -1})
+            let findData= await product.find({$and:[{category: {$regex: category}}, {visiblity: true}]}).limit(50).sort({date: -1})
             res.send(findData)
             //     res.render("category", {data: findDataL})
             
