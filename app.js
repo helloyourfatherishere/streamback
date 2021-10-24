@@ -39,7 +39,7 @@ app.use((req, res, next) => {
     next();
   }) 
   app.use(cors({
-    'Access-Control-Allow-Credentials' : false,
+    'Access-Control-Allow-Credentials' : "omit",
     'exposedHeaders': ['sessionId'],
     'Access-Control-Allow-Origin':'*',
     'Access-Control-Allow-Methods':'GET,HEAD,PUT,PATCH,POST,DELETE',
