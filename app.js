@@ -43,7 +43,9 @@ app.use((req, res, next) => {
     'exposedHeaders': ['sessionId'],
     'Access-Control-Allow-Origin':'*',
     'Access-Control-Allow-Methods':'GET,HEAD,PUT,PATCH,POST,DELETE',
-    'preflightContinue': false
+    'preflightContinue': false,
+    origin : "https://tmwords.netlify.app",
+    credentials: true,
   }));
   
 //GLOBAL VARIABLES
