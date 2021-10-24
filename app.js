@@ -41,9 +41,9 @@ app.use((req, res, next) => {
   app.use(cors({
     'Access-Control-Allow-Credentials' : true,
     'exposedHeaders': ['sessionId'],
-    'Access-Control-Allow-Origin':'*',
+    'Access-Control-Allow-Origin':'https://tmwords.netlify.app/',
     'Access-Control-Allow-Methods':'GET,HEAD,PUT,PATCH,POST,DELETE',
-    'preflightContinue': false,
+    'preflightContinue': true,
   }));
   
 //GLOBAL VARIABLES
