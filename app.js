@@ -540,47 +540,47 @@ app.post("/u/cart", (req, res)=>{
 });
 
 app.post("/addtocart/:id", (req, res)=>{
-    var token= req.cookies.jwt;
+    var token= req.cookies;
     console.log(token)
-    if(token &&token!== undefined && token!== null && token.length>0){
-        var findUserANdToken= async function(){
-            try{
-            let productId=req.params.id;
-            console.log(productId)
-            var verify=  jwt.verify(token, process.env.KEY);
+    // if(token &&token!== undefined && token!== null && token.length>0){
+    //     var findUserANdToken= async function(){
+    //         try{
+    //         let productId=req.params.id;
+    //         console.log(productId)
+    //         var verify=  jwt.verify(token, process.env.KEY);
                 
-            var findUser= await user.findOne({_id: verify._id});
-            var findProduct= await product.findOne({_id: productId});
-            var userCart= findUser.cart;
+    //         var findUser= await user.findOne({_id: verify._id});
+    //         var findProduct= await product.findOne({_id: productId});
+    //         var userCart= findUser.cart;
                 
-            var verifyCart= userCart.some((val,i)=>{
-                return val==productId
-            });
-            if(verifyCart){
-                res.send({status: false, type: 'added'})
-            }
-            else{
-                let cart= findUser.cart=findUser.cart.concat(productId);
-                var addCartDB= new cartDB({
-                        userId: verify._id,
-                        productId: productId,
-                        img: findProduct.main_img.link,
-                        title: findProduct.title
-                    });
-                var userSave=await findUser.save(); 
-                var save=await addCartDB.save();
-                res.send({status: true, type: 'add'})
-            }
-            }
-            catch{
-                (e)=>{console.log(e)}
-            }
-        };
-        findUserANdToken();
-    }
-    else{
-        res.send(false);
-    }
+    //         var verifyCart= userCart.some((val,i)=>{
+    //             return val==productId
+    //         });
+    //         if(verifyCart){
+    //             res.send({status: false, type: 'added'})
+    //         }
+    //         else{
+    //             let cart= findUser.cart=findUser.cart.concat(productId);
+    //             var addCartDB= new cartDB({
+    //                     userId: verify._id,
+    //                     productId: productId,
+    //                     img: findProduct.main_img.link,
+    //                     title: findProduct.title
+    //                 });
+    //             var userSave=await findUser.save(); 
+    //             var save=await addCartDB.save();
+    //             res.send({status: true, type: 'add'})
+    //         }
+    //         }
+    //         catch{
+    //             (e)=>{console.log(e)}
+    //         }
+    //     };
+    //     findUserANdToken();
+    // }
+    // else{
+    //     res.send(false);
+    // }
 });
 
 app.post("/removeCart/:id/:product_id", (req, res)=>{
