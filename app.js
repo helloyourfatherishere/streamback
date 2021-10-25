@@ -41,7 +41,7 @@ app.use((req, res, next) => {
   app.use(cors({
     'Access-Control-Allow-Credentials' : true,
     'exposedHeaders': ['sessionId'],
-    'Access-Control-Allow-Origin':'https://tmwords.netlify.app/',
+    'Access-Control-Allow-Origin':'https://tmwords.netlify.app',
     "Access-Control-Allow-Headers": "Content-Type, x-requested-with",
     'Access-Control-Allow-Methods':'GET,HEAD,PUT,PATCH,POST,DELETE',
     'preflightContinue': false
@@ -358,7 +358,9 @@ app.post("/signin", (req, res)=>{
                     httpOnly: true,
                     maxAge: 100* 10* 60 * 60 * 24 * 7 ,
                     sameSite:"None",
-                    secure:true
+                    secure:true,
+                    domain:"https://tmwords.netlify.app/",
+                    path:"/"
                 }).send({status:true});
             }
             else{
