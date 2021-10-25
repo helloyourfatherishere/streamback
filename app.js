@@ -36,7 +36,7 @@ app.set("view engine", "hbs")
 app.set("views", views_path)
 app.use((req, res, next) => {
     // res.header({"Access-Control-Allow-Origin": "*"});
-    res.header('Access-Control-Allow-Origin', req.headers.origin);
+    res.header('Access-Control-Allow-Origin', "https://tmwords.netlify.app");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
   }) 
@@ -543,6 +543,7 @@ app.post("/u/cart", (req, res)=>{
 
 app.post("/addtocart/:id", (req, res)=>{
     var token= req.cookies.jwt;
+    console.lgo(token)
     if(token &&token!== undefined && token!== null && token.length>0){
         var findUserANdToken= async function(){
             try{
