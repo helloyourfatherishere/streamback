@@ -692,8 +692,8 @@ app.get("/u/order", (req, res)=>{
         try{
             var verify=  jwt.verify(token, process.env.KEY);
             var findUser= await user.findOne({_id: verify._id});
-            console.log(findUser)
             let order= findUser.order
+            console.log(order)
             let c;
             let a=[];
             for (let i=0; i<=order.length; i++){
