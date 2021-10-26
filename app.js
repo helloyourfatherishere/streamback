@@ -912,7 +912,10 @@ app.post("/comment/:id", (req, res)=>{
         try{
             let token= req.cookies.jwt;
             if(!token || token== undefined || token == null || token.length==0){
-                res.redirect(false)
+                res.set("Access-Control-Allow-Origin",req.headers.origin)
+                res.set('Access-Control-Allow-Credentials',"true")
+                res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
+                res.send(false)
             }
             else{  
                  var verify=  jwt.verify(token, process.env.KEY);
@@ -939,6 +942,9 @@ app.post("/comment/:id", (req, res)=>{
                      f();
                 }
                 else{
+                    res.set("Access-Control-Allow-Origin",req.headers.origin)
+                    res.set('Access-Control-Allow-Credentials',"true")
+                    res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
                 res.send(false)
                 }
                 
