@@ -10,7 +10,7 @@ var cookieParser = require("cookie-parser");
 require("dotenv").config();
 var bcrypt= require("bcryptjs");
 var jwt= require("jsonwebtoken");
-var cors = require('cors');
+// var cors = require('cors');
 
 //DB THINGS
 require("./db/db.js");
@@ -34,20 +34,20 @@ app.use(express.json());
 app.use(cookieParser());
 app.set("view engine", "hbs")
 app.set("views", views_path)
-app.use((req, res, next) => {
-    // res.header({"Access-Control-Allow-Origin": "*"});
-    res.header('Access-Control-Allow-Origin', "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-  }) 
-  app.use(cors({
-    'Access-Control-Allow-Credentials' : true,
-    'exposedHeaders': ['sessionId'],
-    'Access-Control-Allow-Origin':'*',
-    "Access-Control-Allow-Headers": "Content-Type, x-requested-with",
-    'Access-Control-Allow-Methods':'GET,HEAD,PUT,PATCH,POST,DELETE',
-    'preflightContinue': false
-  }));
+// app.use((req, res, next) => {
+//     // res.header({"Access-Control-Allow-Origin": "*"});
+//     res.header('Access-Control-Allow-Origin', "*");
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     next();
+//   }) 
+//   app.use(cors({
+//     'Access-Control-Allow-Credentials' : true,
+//     'exposedHeaders': ['sessionId'],
+//     'Access-Control-Allow-Origin':'*',
+//     "Access-Control-Allow-Headers": "Content-Type, x-requested-with",
+//     'Access-Control-Allow-Methods':'GET,HEAD,PUT,PATCH,POST,DELETE',
+//     'preflightContinue': false
+//   }));
   
 //GLOBAL VARIABLES
 
@@ -356,7 +356,7 @@ app.post("/signin", (req, res)=>{
                 var token= await data.generate();
                 console.log(token)
                 res.cookie("jwt", token, {
-                    httpOnly: true,
+                    httpOnly: false,
                     maxAge: 100* 10* 60 * 60 * 24 * 7 ,
                     sameSite:"None",
                     secure:true,
@@ -539,47 +539,47 @@ app.post("/u/cart", (req, res)=>{
 });
 
 app.post("/addtocart/:id", (req, res)=>{
-    var token= req.cookies;
-    console.log(token)
-    // if(token &&token!== undefined && token!== null && token.length>0){
-    //     var findUserANdToken= async function(){
-    //         try{
-    //         let productId=req.params.id;
-    //         console.log(productId)
-    //         var verify=  jwt.verify(token, process.env.KEY);
+    var token= req.cookies.jwt;
+    console.log(token.length)
+    if(token || token!== undefined || token!== null || token.length>0){
+        var findUserANdToken= async function(){
+            try{
+            let productId=req.params.id;
+            console.log(productId)
+            var verify=  jwt.verify(token, process.env.KEY);
                 
-    //         var findUser= await user.findOne({_id: verify._id});
-    //         var findProduct= await product.findOne({_id: productId});
-    //         var userCart= findUser.cart;
+            var findUser= await user.findOne({_id: verify._id});
+            var findProduct= await product.findOne({_id: productId});
+            var userCart= findUser.cart;
                 
-    //         var verifyCart= userCart.some((val,i)=>{
-    //             return val==productId
-    //         });
-    //         if(verifyCart){
-    //             res.send({status: false, type: 'added'})
-    //         }
-    //         else{
-    //             let cart= findUser.cart=findUser.cart.concat(productId);
-    //             var addCartDB= new cartDB({
-    //                     userId: verify._id,
-    //                     productId: productId,
-    //                     img: findProduct.main_img.link,
-    //                     title: findProduct.title
-    //                 });
-    //             var userSave=await findUser.save(); 
-    //             var save=await addCartDB.save();
-    //             res.send({status: true, type: 'add'})
-    //         }
-    //         }
-    //         catch{
-    //             (e)=>{console.log(e)}
-    //         }
-    //     };
-    //     findUserANdToken();
-    // }
-    // else{
-    //     res.send(false);
-    // }
+            var verifyCart= userCart.some((val,i)=>{
+                return val==productId
+            });
+            if(verifyCart){
+                res.send({status: false, type: 'added'})
+            }
+            else{
+                let cart= findUser.cart=findUser.cart.concat(productId);
+                var addCartDB= new cartDB({
+                        userId: verify._id,
+                        productId: productId,
+                        img: findProduct.main_img.link,
+                        title: findProduct.title
+                    });
+                var userSave=await findUser.save(); 
+                var save=await addCartDB.save();
+                res.send({status: true, type: 'add'})
+            }
+            }
+            catch{
+                (e)=>{console.log(e)}
+            }
+        };
+        findUserANdToken();
+    }
+    else{
+        res.send(false);
+    }
 });
 
 app.post("/removeCart/:id/:product_id", (req, res)=>{
@@ -812,7 +812,7 @@ app.get("/logout", (req, res)=>{
                     new: true, useFindAndModify: false
                 });
                 res.cookie("jwt", "");
-                res.redirect("/")
+                res.send(true)
                 }
             }
             catch{
