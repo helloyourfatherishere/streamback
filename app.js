@@ -601,53 +601,53 @@ app.post("/u/cart", (req, res)=>{
 app.post("/addtocart/:id", (req, res)=>{
     var token= req.cookies.jwt;
     console.log(`TOKEN${token}`)
-    if(token || token!== undefined || token!== null || token.length>0){
-        var findUserANdToken= async function(){
-            try{
-            let productId=req.params.id;
-            console.log(productId)
-            var verify=  jwt.verify(token, process.env.KEY);
-                
-            var findUser= await user.findOne({_id: verify._id});
-            var findProduct= await product.findOne({_id: productId});
-            var userCart= findUser.cart;
-                
-            var verifyCart= userCart.some((val,i)=>{
-                return val==productId
-            });
-            if(verifyCart){
-                res.set("Access-Control-Allow-Origin",req.headers.origin)
-                res.set('Access-Control-Allow-Credentials',"true")
-                res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
-                res.send({status: false, type: 'added'})
-            }
-            else{
-                let cart= findUser.cart=findUser.cart.concat(productId);
-                var addCartDB= new cartDB({
-                        userId: verify._id,
-                        productId: productId,
-                        img: findProduct.main_img.link,
-                        title: findProduct.title
-                    });
-                var userSave=await findUser.save(); 
-                var save=await addCartDB.save();
-                res.set("Access-Control-Allow-Origin",req.headers.origin)
-                res.set('Access-Control-Allow-Credentials',"true")
-                res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
-                res.send({status: true, type: 'add'})
-            }
-            }
-            catch{
-                (e)=>{console.log(e)}
-            }
-        };
-        findUserANdToken();
-    }
-    else{
+    if(!token || token== undefined || token== null || token.length==0){
         res.set("Access-Control-Allow-Origin",req.headers.origin)
         res.set('Access-Control-Allow-Credentials',"true")
         res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
         res.send(false);
+       
+    }
+    else{ var findUserANdToken= async function(){
+        try{
+        let productId=req.params.id;
+        console.log(productId)
+        var verify=  jwt.verify(token, process.env.KEY);
+            
+        var findUser= await user.findOne({_id: verify._id});
+        var findProduct= await product.findOne({_id: productId});
+        var userCart= findUser.cart;
+            
+        var verifyCart= userCart.some((val,i)=>{
+            return val==productId
+        });
+        if(verifyCart){
+            res.set("Access-Control-Allow-Origin",req.headers.origin)
+            res.set('Access-Control-Allow-Credentials',"true")
+            res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
+            res.send({status: false, type: 'added'})
+        }
+        else{
+            let cart= findUser.cart=findUser.cart.concat(productId);
+            var addCartDB= new cartDB({
+                    userId: verify._id,
+                    productId: productId,
+                    img: findProduct.main_img.link,
+                    title: findProduct.title
+                });
+            var userSave=await findUser.save(); 
+            var save=await addCartDB.save();
+            res.set("Access-Control-Allow-Origin",req.headers.origin)
+            res.set('Access-Control-Allow-Credentials',"true")
+            res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
+            res.send({status: true, type: 'add'})
+        }
+        }
+        catch{
+            (e)=>{console.log(e)}
+        }
+    };
+    findUserANdToken();
     }
 });
 
