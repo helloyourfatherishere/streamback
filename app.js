@@ -79,6 +79,9 @@ app.get("/api", (req, res)=>{
         let kurti = await product.find({$and: [{category: "ladies-kurti"}, {brand: false}, {visiblity: true}]}).sort({date: -1}).limit(10);
         let collections = await product.find({$and: [{category: "collections"}, {brand: false}, {visiblity: true}]}).sort({date: -1}).limit(10);
         let undergarments = await product.find({$and: [{category: "undergarments"}, {brand: false}, {visiblity: true}]}).sort({date: -1}).limit(10);
+
+        res.set("Access-Control-Allow-Origin",req.headers.origin)
+        res.set('Access-Control-Allow-Credentials',"true")
         res.send([pants,shirts, tShirts,jackets,hoodies,trouser,shalwarKameez,kurti,collections,undergarments, poster, user ,poster]);
         // res.render("index", {
         //     data: tShirts
