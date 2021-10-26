@@ -177,6 +177,9 @@ app.post("/search", (req, res)=>{
             //     local: findLocal,
             //     brand: findBrand
             // });
+            
+        res.set("Access-Control-Allow-Origin",req.headers.origin)
+        res.set('Access-Control-Allow-Credentials',"true")
             res.send({findLocal, findBrand})
 		}catch{
 			(e)=>{
@@ -244,6 +247,9 @@ app.get("/view/:id", (req, res)=>{
               })
             
               var relatedProduct= await product.find({$and: [{keywords: {$in: i}}, {brand: true}]}).sort({data: -1}).limit(15);
+              
+        res.set("Access-Control-Allow-Origin",req.headers.origin)
+        res.set('Access-Control-Allow-Credentials',"true")
               res.send({data: dataObj, more: relatedProduct, find: true})
             //   res.render("view", {data: dataObj, more: relatedProduct})
     };
@@ -279,6 +285,9 @@ app.get("/cate/:cate", (req, res)=>{
             let category= req.params.cate;
             console.log(category)
             let findData= await product.find({$and:[{category: {$regex: category}}, {visiblity: true}]}).limit(50).sort({date: -1})
+            
+        res.set("Access-Control-Allow-Origin",req.headers.origin)
+        res.set('Access-Control-Allow-Credentials',"true")
             res.send(findData)
             //     res.render("category", {data: findDataL})
             
@@ -295,6 +304,9 @@ app.get("/b/:brand_name", (req, res)=>{
             let brand_name= req.params.brand_name;
             console.log(brand_name)
             let findData= await product.find({$and:[{brand_name: {$regex: brand_name}}, {visiblity: true}, {brand: true}]}).limit(50).sort({date: -1})
+            
+        res.set("Access-Control-Allow-Origin",req.headers.origin)
+        res.set('Access-Control-Allow-Credentials',"true")
             res.send(findData)
             //     res.render("category", {data: findDataL})
             
@@ -327,10 +339,14 @@ app.post("/signup", (req, res)=>{
         var data= new user(user_upload);
         data.save()
         .then((d)=>{
+            res.set("Access-Control-Allow-Origin",req.headers.origin)
+            res.set('Access-Control-Allow-Credentials',"true")
             res.send(true)
         }).catch((e)=>{
             if(e){
                 console.log(e);
+                res.set("Access-Control-Allow-Origin",req.headers.origin)
+                res.set('Access-Control-Allow-Credentials',"true")
                 res.send(false);
             }
         })
@@ -358,6 +374,8 @@ app.post("/signin", (req, res)=>{
             if(compare){
                 var token= await data.generate();
                 console.log(token)
+                res.set("Access-Control-Allow-Origin",req.headers.origin)
+                res.set('Access-Control-Allow-Credentials',"true")
                 res.cookie("jwt", token, {
                     httpOnly: false,
                     maxAge: 100* 10* 60 * 60 * 24 * 7 ,
@@ -366,10 +384,14 @@ app.post("/signin", (req, res)=>{
                 }).send({status:true});
             }
             else{
+                res.set("Access-Control-Allow-Origin",req.headers.origin)
+                res.set('Access-Control-Allow-Credentials',"true")
                 res.send({status: false})
             }
             }
             else{
+                res.set("Access-Control-Allow-Origin",req.headers.origin)
+                res.set('Access-Control-Allow-Credentials',"true")
                 res.send({status: false})
             }
         }
@@ -380,21 +402,28 @@ app.post("/signin", (req, res)=>{
     findUser();
 });
 
-app.get("/forgot/:cate", (req, res)=>{
-    var cate= req.params.cate;
-    if(cate=="pass"){
-        res.render("forgot", {cate: cate, placeholder: "enter four digits code"})
-    }
-    else{
-        let token= req.cookies.jwt;
-        if(!token || token== null || token== undefined ||token.length == 0){
-            res.redirect("/login")
-        }
-        else{
-            res.render("forgot", {cate: cate, placeholder: "enter your password"})
-        }
-    }
-})
+// app.get("/forgot/:cate", (req, res)=>{
+//     var cate= req.params.cate;
+//     if(cate=="pass"){
+//         res.render("forgot", {cate: cate, placeholder: "enter four digits code"})
+//     }
+//     else{
+//         let token= req.cookies.jwt;
+//         if(!token || token== null || token== undefined ||token.length == 0){
+            
+//         res.set("Access-Control-Allow-Origin",req.headers.origin)
+//         res.set('Access-Control-Allow-Credentials',"true")
+//             res.send(false)
+//         }
+//         else{
+//             // res.render("forgot", {cate: cate, placeholder: "enter your password"})
+            
+//         res.set("Access-Control-Allow-Origin",req.headers.origin)
+//         res.set('Access-Control-Allow-Credentials',"true")
+//             res.send(true)
+//         }
+//     }
+// })
 app.post("/forgot/:cate", (req, res)=>{
       var findUserSecurity= async function(){
           let cate= req.params.cate;
@@ -411,6 +440,8 @@ app.post("/forgot/:cate", (req, res)=>{
                 }
             if(compare){
                 if(cate =="pass"){
+                    res.set("Access-Control-Allow-Origin",req.headers.origin)
+                    res.set('Access-Control-Allow-Credentials',"true")
                     res.send({
                         email: email,
                         cate: cate,
@@ -418,6 +449,8 @@ app.post("/forgot/:cate", (req, res)=>{
 
                 }
                 else{
+                    res.set("Access-Control-Allow-Origin",req.headers.origin)
+                    res.set('Access-Control-Allow-Credentials',"true")
                     res.send({
                         email: email,
                         cate: cate,
@@ -426,10 +459,14 @@ app.post("/forgot/:cate", (req, res)=>{
                 }
             }
             else{
+                res.set("Access-Control-Allow-Origin",req.headers.origin)
+                res.set('Access-Control-Allow-Credentials',"true")
                 res.send(false)
             }
             }
             else{
+                res.set("Access-Control-Allow-Origin",req.headers.origin)
+                res.set('Access-Control-Allow-Credentials',"true")
                 res.send(false)
             }
         }
@@ -452,6 +489,8 @@ app.post("/change/:cate/:email", (req, res)=>{
                         let data= await user.findOneAndUpdate({email: email},{$set: {pass: pass}},{
                             new: true , useFindAndModify: false
                         });
+                        res.set("Access-Control-Allow-Origin",req.headers.origin)
+                        res.set('Access-Control-Allow-Credentials',"true")
                         res.send(true)
                     }catch{
                         (e)=>{console.log(e)}
@@ -466,6 +505,8 @@ app.post("/change/:cate/:email", (req, res)=>{
                         let data= await user.findOneAndUpdate({email: email},{$set: {security_code: securityCode}},{
                             new: true , useFindAndModify: false
                         });
+                        res.set("Access-Control-Allow-Origin",req.headers.origin)
+                        res.set('Access-Control-Allow-Credentials',"true")
                         res.send(true)
                     }
                     catch{
@@ -485,6 +526,8 @@ app.post("/main", (req, res)=>{
     var find_main_data= async function(){
         try{
             let main_data= await main.findOne({});
+        res.set("Access-Control-Allow-Origin",req.headers.origin)
+        res.set('Access-Control-Allow-Credentials',"true")
             res.send({main_data})
         }
         catch{
@@ -502,11 +545,16 @@ app.get("/verify_user", (req, res)=>{
     else{
         verify_user= true;
     }
+    res.set("Access-Control-Allow-Origin",req.headers.origin)
+    res.set('Access-Control-Allow-Credentials',"true")
     res.send({verify_user: verify_user})
 });
 app.post("/u/cart", (req, res)=>{
     let token= req.cookies.jwt;
     if(!token || token== null || token== undefined ||token.length == 0){
+        
+        res.set("Access-Control-Allow-Origin",req.headers.origin)
+        res.set('Access-Control-Allow-Credentials',"true")
         res.send(false)
     }
     else{      
@@ -522,6 +570,8 @@ app.post("/u/cart", (req, res)=>{
                 var find= product.find({_id: userCart[i]}).then((p)=>{
                     let cart = arr=arr.concat(p)
                     if(length == userCart.length){
+                        res.set("Access-Control-Allow-Origin",req.headers.origin)
+                        res.set('Access-Control-Allow-Credentials',"true")
                         res.send({userId: verify._id,product: arr});
                     }
                 }).catch((e)=>{
@@ -530,6 +580,8 @@ app.post("/u/cart", (req, res)=>{
             }
           }
           else{
+            res.set("Access-Control-Allow-Origin",req.headers.origin)
+            res.set('Access-Control-Allow-Credentials',"true")
               res.send({userId: verify._id,product: []})
           }
         }
@@ -559,6 +611,8 @@ app.post("/addtocart/:id", (req, res)=>{
                 return val==productId
             });
             if(verifyCart){
+                res.set("Access-Control-Allow-Origin",req.headers.origin)
+                res.set('Access-Control-Allow-Credentials',"true")
                 res.send({status: false, type: 'added'})
             }
             else{
@@ -571,6 +625,8 @@ app.post("/addtocart/:id", (req, res)=>{
                     });
                 var userSave=await findUser.save(); 
                 var save=await addCartDB.save();
+                res.set("Access-Control-Allow-Origin",req.headers.origin)
+                res.set('Access-Control-Allow-Credentials',"true")
                 res.send({status: true, type: 'add'})
             }
             }
@@ -581,6 +637,8 @@ app.post("/addtocart/:id", (req, res)=>{
         findUserANdToken();
     }
     else{
+        res.set("Access-Control-Allow-Origin",req.headers.origin)
+        res.set('Access-Control-Allow-Credentials',"true")
         res.send(false);
     }
 });
@@ -602,6 +660,8 @@ app.post("/removeCart/:id/:product_id", (req, res)=>{
         let removeCart= await cartDB.findByIdAndRemove({_id: productId},{
             new: true, useFindAndModify: false
         })
+        res.set("Access-Control-Allow-Origin",req.headers.origin)
+        res.set('Access-Control-Allow-Credentials',"true")
         res.send(true);
         }
         catch{
@@ -613,6 +673,8 @@ app.post("/removeCart/:id/:product_id", (req, res)=>{
 app.get("/u/order", (req, res)=>{
     let token= req.cookies.jwt;
     if(!token || token== null || token== undefined){
+        res.set("Access-Control-Allow-Origin",req.headers.origin)
+        res.set('Access-Control-Allow-Credentials',"true")
         res.send(false)
     }
     else{      
@@ -636,8 +698,12 @@ app.get("/u/order", (req, res)=>{
                             let c= a
                             console.log("C"+ " "+ c)
                             if(c[0] || c[0]!==null || c[0]!==undefined){
+                                res.set("Access-Control-Allow-Origin",req.headers.origin)
+                                res.set('Access-Control-Allow-Credentials',"true")
                                 res.send({product: c})            }
                             else{
+                                res.set("Access-Control-Allow-Origin",req.headers.origin)
+                                res.set('Access-Control-Allow-Credentials',"true")
                                 res.send({product: c});
                             }
                         }
@@ -707,7 +773,10 @@ app.post("/order/register/:userId", (req, res)=>{
                         let ab=await placeOrder.save();
                         var order= userDetails.order= userDetails.order.concat(ab._id);
                         var s=await userDetails.save();
-                        res.redirect("/cart");
+                            // res.redirect("/cart");
+                        res.set("Access-Control-Allow-Origin",req.headers.origin)
+                        res.set('Access-Control-Allow-Credentials',"true")
+                        res.send(true)
                     };placeOrderInUser();
                 }
             })
@@ -745,6 +814,8 @@ app.post("/order/unregistered", (req, res)=>{
                 });
                 let result = await insert.save();
                 console.log(result)
+                res.set("Access-Control-Allow-Origin",req.headers.origin)
+                res.set('Access-Control-Allow-Credentials',"true")
                 res.send("YOUR ORDER WILL BE SUBMITTED AFTER CONFIRMING IT BY YOUR GIVEN INFORMATION KEEP UPDATED AND HAPP SHOPPING")
             }
             catch{
@@ -814,7 +885,11 @@ app.get("/logout", (req, res)=>{
                 var findUserAndRemoveToken= await user.findByIdAndUpdate({_id: verify._id}, {$set:{tokens:[]}}, {
                     new: true, useFindAndModify: false
                 });
-                res.cookie("jwt", "");
+                res.cookie("jwt", "",{
+                    maxAge:0
+                });
+                res.set("Access-Control-Allow-Origin",req.headers.origin)
+                res.set('Access-Control-Allow-Credentials',"true")
                 res.send(true)
                 }
             }
@@ -871,6 +946,8 @@ app.post("/comment/:id", (req, res)=>{
 app.get("/u/recieved", (req, res)=>{
     let token= req.cookies.jwt;
     if(!token || token== null || token== undefined ||token.length==0){
+        res.set("Access-Control-Allow-Origin",req.headers.origin)
+        res.set('Access-Control-Allow-Credentials',"true")
         res.send(false)
     }
     else{      
@@ -891,8 +968,13 @@ app.get("/u/recieved", (req, res)=>{
                             let c= a
                             console.log(c)
                             if(c || c!==null || c!==undefined){
-                                res.send({product: c})            }
+                                res.set("Access-Control-Allow-Origin",req.headers.origin)
+                                res.set('Access-Control-Allow-Credentials',"true")
+                                res.send({product: c})       
+                             }
                             else{
+                                res.set("Access-Control-Allow-Origin",req.headers.origin)
+                                res.set('Access-Control-Allow-Credentials',"true")
                                 res.send({product: c});
                             }
                         }
@@ -922,6 +1004,8 @@ app.post("/feed/:sub", (req, res)=>{
                 sub: sub
             });
             let data= await feedData.save();
+            res.set("Access-Control-Allow-Origin",req.headers.origin)
+            res.set('Access-Control-Allow-Credentials',"true")
             res.send(true)
 
         }
