@@ -85,6 +85,7 @@ app.get("/api", (req, res)=>{
 
         res.set("Access-Control-Allow-Origin",req.headers.origin)
         res.set('Access-Control-Allow-Credentials',"true")
+        res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
         res.send([pants,shirts, tShirts,jackets,hoodies,trouser,shalwarKameez,kurti,collections,undergarments, poster, user ,poster]);
         // res.render("index", {
         //     data: tShirts
@@ -183,6 +184,7 @@ app.post("/search", (req, res)=>{
             
         res.set("Access-Control-Allow-Origin",req.headers.origin)
         res.set('Access-Control-Allow-Credentials',"true")
+        res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
             res.send({findLocal, findBrand})
 		}catch{
 			(e)=>{
@@ -925,7 +927,10 @@ app.post("/comment/:id", (req, res)=>{
                             let findProduct= await product.findOne({_id: productId});
                             let productComment= findProduct.comments= findProduct.comments.concat({name: name, comment: comment})
                             let a=await findProduct.save();
-                            res.redirect(`/view/${productId}`)
+                            res.set("Access-Control-Allow-Origin",req.headers.origin)
+                            res.set('Access-Control-Allow-Credentials',"true")
+                            res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
+                            res.send(true)
                         }
                         catch{
                             (e)=>{console.log(e)}
@@ -934,7 +939,7 @@ app.post("/comment/:id", (req, res)=>{
                      f();
                 }
                 else{
-                res.redirect("/login")
+                res.send(false)
                 }
                 
             }
@@ -1009,6 +1014,7 @@ app.post("/feed/:sub", (req, res)=>{
             let data= await feedData.save();
             res.set("Access-Control-Allow-Origin",req.headers.origin)
             res.set('Access-Control-Allow-Credentials',"true")
+            res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
             res.send(true)
 
         }
