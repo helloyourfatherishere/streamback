@@ -679,7 +679,7 @@ app.post("/removeCart/:id/:product_id", (req, res)=>{
     };
     findUserAndRemoveCart();
 });
-app.get("/u/order", (req, res)=>{
+app.post("/u/order", (req, res)=>{
     let token= req.cookies.jwt;
     if(!token || token== null || token== undefined){
         res.set("Access-Control-Allow-Origin",req.headers.origin)
@@ -967,7 +967,7 @@ app.post("/comment/:id", (req, res)=>{
     comment();  
 });
 
-app.get("/u/recieved", (req, res)=>{
+app.post("/u/recieved", (req, res)=>{
     let token= req.cookies.jwt;
     if(!token || token== null || token== undefined ||token.length==0){
         res.set("Access-Control-Allow-Origin",req.headers.origin)
