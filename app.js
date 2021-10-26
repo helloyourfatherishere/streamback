@@ -382,7 +382,7 @@ app.post("/signin", (req, res)=>{
                 res.set("Access-Control-Allow-Origin",req.headers.origin)
                 res.set('Access-Control-Allow-Credentials',"true")
                 res.cookie("jwt", token, {
-                    httpOnly: false,
+                    httpOnly: true,
                     maxAge: 100* 10* 60 * 60 * 24 * 7 ,
                     sameSite:"None",
                     secure:true,
@@ -899,12 +899,14 @@ app.get("/logout", (req, res)=>{
                 var findUserAndRemoveToken= await user.findByIdAndUpdate({_id: verify._id}, {$set:{tokens:[]}}, {
                     new: true, useFindAndModify: false
                 });
-                res.cookie("jwt", "",{
-                    maxAge:0
-                });
                 res.set("Access-Control-Allow-Origin",req.headers.origin)
                 res.set('Access-Control-Allow-Credentials',"true")
                 res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
+                res.cookie("jwt", "",{
+                    maxAge:0,
+                    sameSite:"None",
+                    secure:true
+                });
                 res.send(true)
                 }
             }
