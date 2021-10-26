@@ -981,6 +981,8 @@ app.get("/u/recieved", (req, res)=>{
             var verify =  jwt.verify(token, process.env.KEY);
             var findUser= await user.findOne({_id: verify._id});
             let recieved= findUser.received;
+            console.log(findUser)
+            console.log(recieved)
             let c;
             let a=[];
             for (let i=0; i<=recieved.length; i++){
@@ -988,6 +990,7 @@ app.get("/u/recieved", (req, res)=>{
                     try{
                         let index=i+1
                         var findDelievered= await delieveredDB.findOne({_id:recieved[i]}).sort({date: -1});
+                        console.log(findDelievered)
                         let arr=a.push(findDelievered)
                         if(index===recieved.length){
                             let c= a
