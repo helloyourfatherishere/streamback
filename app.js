@@ -995,7 +995,7 @@ app.post("/u/recieved", (req, res)=>{
                         if(index===recieved.length){
                             let c= a
                             console.log(c)
-                            if(c || c!==null || c!==undefined){
+                            if(c[0] || c[0]!==null || c[0]!==undefined){
                                 res.set("Access-Control-Allow-Origin",req.headers.origin)
                                 res.set('Access-Control-Allow-Credentials',"true")
                                 res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
