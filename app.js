@@ -284,7 +284,7 @@ app.get("/view/:id", (req, res)=>{
 //     cate();
 // });
 
-app.get("/cate/:cate", (req, res)=>{
+app.post("/cate/:cate", (req, res)=>{
     var cate= async function(){
         try{
             let category= req.params.cate;
@@ -303,7 +303,7 @@ app.get("/cate/:cate", (req, res)=>{
     };
     cate();
 });
-app.get("/b/:brand_name", (req, res)=>{
+app.post("/b/:brand_name", (req, res)=>{
     var cate= async function(){
         try{
             let brand_name= req.params.brand_name;
