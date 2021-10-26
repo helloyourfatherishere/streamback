@@ -600,7 +600,7 @@ app.post("/u/cart", (req, res)=>{
 
 app.post("/addtocart/:id", (req, res)=>{
     var token= req.cookies.jwt;
-    console.log(token)
+    console.log(`TOKEN${token}`)
     if(token || token!== undefined || token!== null || token.length>0){
         var findUserANdToken= async function(){
             try{
