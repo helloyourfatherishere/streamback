@@ -618,6 +618,7 @@ app.post("/addtocart/:id", (req, res)=>{
             if(verifyCart){
                 res.set("Access-Control-Allow-Origin",req.headers.origin)
                 res.set('Access-Control-Allow-Credentials',"true")
+                res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
                 res.send({status: false, type: 'added'})
             }
             else{
@@ -632,6 +633,7 @@ app.post("/addtocart/:id", (req, res)=>{
                 var save=await addCartDB.save();
                 res.set("Access-Control-Allow-Origin",req.headers.origin)
                 res.set('Access-Control-Allow-Credentials',"true")
+                res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
                 res.send({status: true, type: 'add'})
             }
             }
@@ -644,6 +646,7 @@ app.post("/addtocart/:id", (req, res)=>{
     else{
         res.set("Access-Control-Allow-Origin",req.headers.origin)
         res.set('Access-Control-Allow-Credentials',"true")
+        res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
         res.send(false);
     }
 });
@@ -667,6 +670,7 @@ app.post("/removeCart/:id/:product_id", (req, res)=>{
         })
         res.set("Access-Control-Allow-Origin",req.headers.origin)
         res.set('Access-Control-Allow-Credentials',"true")
+        res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
         res.send(true);
         }
         catch{
@@ -680,6 +684,7 @@ app.get("/u/order", (req, res)=>{
     if(!token || token== null || token== undefined){
         res.set("Access-Control-Allow-Origin",req.headers.origin)
         res.set('Access-Control-Allow-Credentials',"true")
+        res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
         res.send(false)
     }
     else{      
@@ -705,10 +710,12 @@ app.get("/u/order", (req, res)=>{
                             if(c[0] || c[0]!==null || c[0]!==undefined){
                                 res.set("Access-Control-Allow-Origin",req.headers.origin)
                                 res.set('Access-Control-Allow-Credentials',"true")
+                                res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
                                 res.send({product: c})            }
                             else{
                                 res.set("Access-Control-Allow-Origin",req.headers.origin)
                                 res.set('Access-Control-Allow-Credentials',"true")
+                                res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
                                 res.send({product: c});
                             }
                         }
@@ -781,6 +788,7 @@ app.post("/order/register/:userId", (req, res)=>{
                             // res.redirect("/cart");
                         res.set("Access-Control-Allow-Origin",req.headers.origin)
                         res.set('Access-Control-Allow-Credentials',"true")
+                        res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
                         res.send(true)
                     };placeOrderInUser();
                 }
@@ -821,6 +829,7 @@ app.post("/order/unregistered", (req, res)=>{
                 console.log(result)
                 res.set("Access-Control-Allow-Origin",req.headers.origin)
                 res.set('Access-Control-Allow-Credentials',"true")
+                res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
                 res.send("YOUR ORDER WILL BE SUBMITTED AFTER CONFIRMING IT BY YOUR GIVEN INFORMATION KEEP UPDATED AND HAPP SHOPPING")
             }
             catch{
@@ -895,6 +904,7 @@ app.get("/logout", (req, res)=>{
                 });
                 res.set("Access-Control-Allow-Origin",req.headers.origin)
                 res.set('Access-Control-Allow-Credentials',"true")
+                res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
                 res.send(true)
                 }
             }
