@@ -989,7 +989,7 @@ app.get("/u/recieved", (req, res)=>{
                 let find= async function(a){
                     try{
                         let index=i+1
-                        var findDelievered= await delieveredDB.findOne({_id:recieved[i]}).sort({date: -1});
+                        var findDelievered= await delieveredDB.findOne({_id:`${recieved[i]}`}).sort({date: -1});
                         console.log(findDelievered)
                         let arr=a.push(findDelievered)
                         if(index===recieved.length){
