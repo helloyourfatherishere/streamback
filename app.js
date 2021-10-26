@@ -716,7 +716,7 @@ app.post("/u/order", (req, res)=>{
                                 res.set("Access-Control-Allow-Origin",req.headers.origin)
                                 res.set('Access-Control-Allow-Credentials',"true")
                                 res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
-                                res.send({product: c});
+                                res.send({product: []});
                             }
                         }
                     }
@@ -972,6 +972,7 @@ app.post("/u/recieved", (req, res)=>{
     if(!token || token== null || token== undefined ||token.length==0){
         res.set("Access-Control-Allow-Origin",req.headers.origin)
         res.set('Access-Control-Allow-Credentials',"true")
+        res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
         res.send(false)
     }
     else{      
@@ -997,12 +998,14 @@ app.post("/u/recieved", (req, res)=>{
                             if(c || c!==null || c!==undefined){
                                 res.set("Access-Control-Allow-Origin",req.headers.origin)
                                 res.set('Access-Control-Allow-Credentials',"true")
+                                res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
                                 res.send({product: c})       
                              }
                             else{
                                 res.set("Access-Control-Allow-Origin",req.headers.origin)
                                 res.set('Access-Control-Allow-Credentials',"true")
-                                res.send({product: c});
+                                res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
+                                res.send({product: []});
                             }
                         }
                     }
