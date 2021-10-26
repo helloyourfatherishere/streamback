@@ -699,7 +699,8 @@ app.get("/u/order", (req, res)=>{
             for (let i=0; i<=order.length; i++){
                 let findO= async function(a){
                     try{
-                        let o=order[i]
+                        let o=`${order[i]}`
+                        console.log(o)
                         let index=i+1
                         let findOrder= await orderDB.findOne({_id: o});
                         console.log(`findOrder ${findOrder}`)
