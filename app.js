@@ -912,7 +912,7 @@ app.post("/comment/:id", (req, res)=>{
         try{
             let token= req.cookies.jwt;
             if(!token || token== undefined || token == null || token.length==0){
-                res.redirect("/login")
+                res.redirect(false)
             }
             else{  
                  var verify=  jwt.verify(token, process.env.KEY);
