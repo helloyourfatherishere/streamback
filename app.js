@@ -993,23 +993,23 @@ app.post("/u/recieved", (req, res)=>{
                         let index=i+1
                         var findDelievered= await delieveredDB.findOne({_id:recieved[i]})
                         console.log(`DELIEVERED${findDelievered}`)
-                        let arr=a.push(findDelievered)
-                        if(index===recieved.length){
-                            let c= a
-                            console.log(c)
-                            if(c[0] || c[0]!==null || c[0]!==undefined){
-                                res.set("Access-Control-Allow-Origin",req.headers.origin)
-                                res.set('Access-Control-Allow-Credentials',"true")
-                                res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
-                                res.send({product: c})       
-                             }
-                            else{
-                                res.set("Access-Control-Allow-Origin",req.headers.origin)
-                                res.set('Access-Control-Allow-Credentials',"true")
-                                res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
-                                res.send({product: []});
-                            }
-                        }
+                        // let arr=a.push(findDelievered)
+                        // if(index===recieved.length){
+                        //     let c= a
+                        //     console.log(c)
+                        //     if(c[0] || c[0]!==null || c[0]!==undefined){
+                        //         res.set("Access-Control-Allow-Origin",req.headers.origin)
+                        //         res.set('Access-Control-Allow-Credentials',"true")
+                        //         res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
+                        //         res.send({product: c})       
+                        //      }
+                        //     else{
+                        //         res.set("Access-Control-Allow-Origin",req.headers.origin)
+                        //         res.set('Access-Control-Allow-Credentials',"true")
+                        //         res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
+                        //         res.send({product: []});
+                        //     }
+                        // }
                     }
                     catch{
                         (e)=>{console.log(e)}
