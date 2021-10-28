@@ -983,7 +983,6 @@ app.post("/u/recieved", (req, res)=>{
             var verify =  jwt.verify(token, process.env.KEY);
             var findUser= await user.findOne({_id: verify._id});
             let recieved= findUser.received;
-            console.log(findUser)
             console.log(recieved)
             let c;
             let a=[];
@@ -991,8 +990,8 @@ app.post("/u/recieved", (req, res)=>{
                 let find= async function(a){
                     try{
                         let index=i+1
-                        var findDelievered= await delieveredDB.findOne({_id:`${recieved[i]}`}).sort({date: -1});
-                        console.log(findDelievered)
+                        var findDelievered= await delieveredDB.findOne({_id:recieved[i]})
+                        console.log(`DELIEVERED${findDelievered}`)
                         let arr=a.push(findDelievered)
                         if(index===recieved.length){
                             let c= a
