@@ -704,7 +704,7 @@ app.post("/u/order", (req, res)=>{
                         let index=i+1
                         let findOrder= await orderDB.findOne({_id: o});
                         let arr=a.push(findOrder)
-                        console.log(`findOrder ${arr}`)
+                        console.log(`findOrder ${a}`)
 
                     //     if(index===order.length){
                     //         let c= a
