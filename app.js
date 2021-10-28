@@ -874,7 +874,7 @@ app.post("/order/unregistered", (req, res)=>{
             let ab=await placeOrder.save();
             let o = findUser.order=findUser.order.concat(ab._id);
             let s= await findUser.save();
-            res.redirect(`https://tmwords.netlify.app/view/${id}`)
+            res.redirect(true)
             };
             addProductRegister();
         }
