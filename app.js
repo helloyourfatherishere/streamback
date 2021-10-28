@@ -219,6 +219,7 @@ app.post("/search", (req, res)=>{
 app.post("/view/:id", (req, res)=>{
     var findData= async function(){
         var dataFind= await product.findOne({_id: req.params.id});
+        console.log(dataFind)
         var dataObj= 
             {
                 images: dataFind.images,
