@@ -55,10 +55,7 @@ app.use((req, res, next) => {
 //GLOBAL VARIABLES
 
 //ROUTES
-app.get("/", (req, res)=>{
-    res.send("HELLO")
-})
-app.get("/api", (req, res)=>{
+app.post("/api", (req, res)=>{
     var find = async function(){
         try{
             console.log(req.body)
@@ -83,7 +80,7 @@ app.get("/api", (req, res)=>{
         let collections = await product.find({$and: [{category: "collections"}, {brand: false}, {visiblity: true}]}).sort({date: -1}).limit(10);
         let undergarments = await product.find({$and: [{category: "undergarments"}, {brand: false}, {visiblity: true}]}).sort({date: -1}).limit(10);
 
-        res.set("Access-Control-Allow-Origin","https://tmwords.netlify.app/")
+        res.set("Access-Control-Allow-Origin",req.headers.origin)
         res.set('Access-Control-Allow-Credentials',"true")
         res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
         res.send([pants,shirts, tShirts,jackets,hoodies,trouser,shalwarKameez,kurti,collections,undergarments, poster, user ,poster]);
@@ -219,7 +216,7 @@ app.post("/search", (req, res)=>{
 // 		}
 // 	});
 // })
-app.get("/view/:id", (req, res)=>{
+app.post("/view/:id", (req, res)=>{
     var findData= async function(){
         var dataFind= await product.findOne({_id: req.params.id});
         var dataObj= 
