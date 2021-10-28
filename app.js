@@ -69,16 +69,16 @@ app.post("/api", (req, res)=>{
             }
         let main_data= await main.findOne({});
         let poster= main_data.poster;
-        let pants = await product.find({$and: [{category: "pants"}, {brand: false}, {visiblity: true}]}).sort({date: -1}).limit(10);
-        let shirts = await product.find({$and: [{category: "shirts"}, {brand: false}, {visiblity: true}]}).sort({date: -1}).limit(10);
-        let tShirts = await product.find({$and: [{category: "t-shirts"}, {brand: false}, {visiblity: true}]}).sort({date: -1}).limit(10);
-        let jackets = await product.find({$and: [{category: "jackets"}, {brand: false}, {visiblity: true}]}).sort({date: -1}).limit(10);
-        let hoodies = await product.find({$and: [{category: "hoodies"}, {brand: false}, {visiblity: true}]}).sort({date: -1}).limit(10);
-        let trouser = await product.find({$and: [{category: "trouser"}, {brand: false}, {visiblity: true}]}).sort({date: -1}).limit(10);
-        let shalwarKameez = await product.find({$and: [{category: "shalwar-kameez"}, {brand: false}, {visiblity: true}]}).sort({date: -1}).limit(10);
-        let kurti = await product.find({$and: [{category: "ladies-kurti"}, {brand: false}, {visiblity: true}]}).sort({date: -1}).limit(10);
-        let collections = await product.find({$and: [{category: "collections"}, {brand: false}, {visiblity: true}]}).sort({date: -1}).limit(10);
-        let undergarments = await product.find({$and: [{category: "undergarments"}, {brand: false}, {visiblity: true}]}).sort({date: -1}).limit(10);
+        let pants = await product.find({$and: [{category: "pants"},  {visiblity: true}]}).sort({date: -1}).limit(20);
+        let shirts = await product.find({$and: [{category: "shirts"},  {visiblity: true}]}).sort({date: -1}).limit(20);
+        let tShirts = await product.find({$and: [{category: "t-shirts"},  {visiblity: true}]}).sort({date: -1}).limit(20);
+        let jackets = await product.find({$and: [{category: "jackets"},  {visiblity: true}]}).sort({date: -1}).limit(20);
+        let hoodies = await product.find({$and: [{category: "hoodies"},  {visiblity: true}]}).sort({date: -1}).limit(20);
+        let trouser = await product.find({$and: [{category: "trouser"},  {visiblity: true}]}).sort({date: -1}).limit(20);
+        let shalwarKameez = await product.find({$and: [{category: "shalwar-kameez"},  {visiblity: true}]}).sort({date: -1}).limit(20);
+        let kurti = await product.find({$and: [{category: "ladies-kurti"},  {visiblity: true}]}).sort({date: -1}).limit(20);
+        let collections = await product.find({$and: [{category: "collections"},  {visiblity: true}]}).sort({date: -1}).limit(20);
+        let undergarments = await product.find({$and: [{category: "undergarments"},  {visiblity: true}]}).sort({date: -1}).limit(20);
 
         res.set("Access-Control-Allow-Origin",req.headers.origin)
         res.set('Access-Control-Allow-Credentials',"true")
