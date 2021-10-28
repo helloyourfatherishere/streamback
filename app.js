@@ -249,7 +249,7 @@ app.post("/view/:id", (req, res)=>{
                   return( new RegExp(val))
               })
             
-              var relatedProduct= await product.find({$and: [{keywords: {$in: i}}, {brand: true}]}).sort({data: -1}).limit(15);
+              var relatedProduct= await product.find({$and: [{keywords: {$in: i}}, {brand: true},{category:dataFind.category}]}).sort({data: -1}).limit(15);
               
         res.set("Access-Control-Allow-Origin",req.headers.origin)
         res.set('Access-Control-Allow-Credentials',"true")
