@@ -789,7 +789,7 @@ app.post("/order/register/:userId", (req, res)=>{
                         res.set("Access-Control-Allow-Origin",req.headers.origin)
                         res.set('Access-Control-Allow-Credentials',"true")
                         res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
-                        res.send(true)
+                        res.redirect("http://tmwpanel.herokuapp.com/")
                     };placeOrderInUser();
                 }
             })

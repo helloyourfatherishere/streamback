@@ -1,6 +1,7 @@
 var mongoose = require("mongoose");
 var bcrypt= require("bcryptjs");
 var jwt= require("jsonwebtoken");
+
 var user_Schema= new mongoose.Schema({
    name:{
        type: String,
