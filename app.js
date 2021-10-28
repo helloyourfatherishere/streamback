@@ -830,7 +830,7 @@ app.post("/order/unregistered", (req, res)=>{
                 res.set("Access-Control-Allow-Origin",req.headers.origin)
                 res.set('Access-Control-Allow-Credentials',"true")
                 res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
-                res.send("YOUR ORDER WILL BE SUBMITTED AFTER CONFIRMING IT BY YOUR GIVEN INFORMATION KEEP UPDATED AND HAPP SHOPPING")
+                res.send(true)
             }
             catch{
                 (e)=>{
@@ -874,7 +874,7 @@ app.post("/order/unregistered", (req, res)=>{
             let ab=await placeOrder.save();
             let o = findUser.order=findUser.order.concat(ab._id);
             let s= await findUser.save();
-            res.redirect(`/view/${id}`)
+            res.redirect(`https://tmwords.netlify.app/view/${id}`)
             };
             addProductRegister();
         }
