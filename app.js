@@ -693,32 +693,33 @@ app.post("/u/order", (req, res)=>{
             var verify=  jwt.verify(token, process.env.KEY);
             var findUser= await user.findOne({_id: verify._id});
             let order= findUser.order
+            console.log(order)
             let c;
             let a=[];
             for (let i=0; i<=order.length; i++){
                 let findO= async function(a){
                     try{
-                        let o=JSON.stringify(order[i])
+                        let o=order[i]
                         console.log(o)
                         let index=i+1
                         let findOrder= await orderDB.findOne({_id: o});
                         console.log(`findOrder ${findOrder}`)
-                        let arr=a.push(findOrder)
-                        if(index===order.length){
-                            let c= a
-                            console.log("C"+ " "+ c)
-                            if(c[0] || c[0]!==null || c[0]!==undefined){
-                                res.set("Access-Control-Allow-Origin",req.headers.origin)
-                                res.set('Access-Control-Allow-Credentials',"true")
-                                res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
-                                res.send({product: c})            }
-                            else{
-                                res.set("Access-Control-Allow-Origin",req.headers.origin)
-                                res.set('Access-Control-Allow-Credentials',"true")
-                                res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
-                                res.send({product: []});
-                            }
-                        }
+                    //     let arr=a.push(findOrder)
+                    //     if(index===order.length){
+                    //         let c= a
+                    //         console.log("C"+ " "+ c)
+                    //         if(c[0] || c[0]!==null || c[0]!==undefined){
+                    //             res.set("Access-Control-Allow-Origin",req.headers.origin)
+                    //             res.set('Access-Control-Allow-Credentials',"true")
+                    //             res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
+                    //             res.send({product: c})            }
+                    //         else{
+                    //             res.set("Access-Control-Allow-Origin",req.headers.origin)
+                    //             res.set('Access-Control-Allow-Credentials',"true")
+                    //             res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
+                    //             res.send({product: []});
+                    //         }
+                    //     }
                     }
                     catch{
                         (e)=>{console.log(e)}
