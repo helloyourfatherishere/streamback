@@ -76,7 +76,7 @@ app.post("/api", (req, res)=>{
         let hoodies = await product.find({$and: [{category: "hoodies"},  {visiblity: true}]}).sort({date: -1}).limit(20);
         let trouser = await product.find({$and: [{category: "trousers"},  {visiblity: true}]}).sort({date: -1}).limit(20);
         let shalwarKameez = await product.find({$and: [{category: "shalwar-kameez"},  {visiblity: true}]}).sort({date: -1}).limit(20);
-        let kurti = await product.find({$and: [{category: "ladies-kurti"},  {visiblity: true}]}).sort({date: -1}).limit(20);
+        let kurti = await product.find({$and: [{category: "kurti"},  {visiblity: true}]}).sort({date: -1}).limit(20);
         let collections = await product.find({$and: [{category: "collections"},  {visiblity: true}]}).sort({date: -1}).limit(20);
         let undergarments = await product.find({$and: [{category: "undergarments"},  {visiblity: true}]}).sort({date: -1}).limit(20);
 
