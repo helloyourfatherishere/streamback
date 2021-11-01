@@ -77,7 +77,7 @@ app.post("/api", (req, res)=>{
         let trouser = await product.find({$and: [{category: "trousers"},  {visiblity: true}]}).sort({date: -1}).limit(20);
         let shalwarKameez = await product.find({$and: [{category: "shalwar-kameez"},  {visiblity: true}]}).sort({date: -1}).limit(20);
         let kurti = await product.find({$and: [{category: "kurti"},  {visiblity: true}]}).sort({date: -1}).limit(20);
-        let collections = await product.find({$and: [{category: "collections"},  {visiblity: true}]}).sort({date: -1}).limit(20);
+        let collections = await product.find({$and: [{category: "three-piece"},  {visiblity: true}]}).sort({date: -1}).limit(20);
         let undergarments = await product.find({$and: [{category: "undergarments"},  {visiblity: true}]}).sort({date: -1}).limit(20);
 
         res.set("Access-Control-Allow-Origin",req.headers.origin)
