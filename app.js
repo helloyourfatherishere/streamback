@@ -1026,7 +1026,7 @@ app.post("/u/recieved", (req, res)=>{
 app.post("/feed/:sub", (req, res)=>{
     var feedandComments= async function(){
         try{
-            let sub= req.params.for;
+            let sub= req.params.sub;
             let {email, message}= req.body;
             console.log(email+message)
             let feedData= new feed({
