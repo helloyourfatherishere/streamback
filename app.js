@@ -1024,19 +1024,18 @@ app.post("/u/recieved", (req, res)=>{
     }
 });
 app.post("/feed/:sub", (req, res)=>{
-    console.log(req.params.sub)
-    console.log(req.body.email)
-    console.log(req.body.message)
     var feedandComments= async function(){
         try{
             let sub= req.params.for;
             let {email, message}= req.body;
+            console.log(email+message)
             let feedData= new feed({
                 email: email,
                 message: message,
                 sub: sub
             });
             let data= await feedData.save();
+            console.log(data)
             res.set("Access-Control-Allow-Origin",req.headers.origin)
             res.set('Access-Control-Allow-Credentials',"true")
             res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
