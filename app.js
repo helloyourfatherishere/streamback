@@ -171,7 +171,7 @@ app.post("/search", (req, res)=>{
     var f= async function(){
 		try{
             var query= req.body.values;
-            var findLocal= await product.find({$and:[{visiblity: true}, {$or: [{keywords: {$regex: query}}, {title: {$regex: query}}, {category:{$regex: query}}]}]}).limit(30).sort({data: -1})
+            var findLocal= await product.find({$and:[{visiblity: true}, {$or: [{title: {$regex: query}},{keywords: {$regex: query}}, {search_keyword: {$regex: query}}, {category:{$regex: query}}]}]}).limit(30).sort({data: -1})
             var findBrand= ""
             console.log(findLocal)
             // res.render("search", {
