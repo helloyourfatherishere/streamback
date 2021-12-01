@@ -1035,7 +1035,6 @@ app.post("/feed/:sub", (req, res)=>{
                 sub: sub
             });
             let data= await feedData.save();
-            console.log(data)
             res.set("Access-Control-Allow-Origin",req.headers.origin)
             res.set('Access-Control-Allow-Credentials',"true")
             res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
