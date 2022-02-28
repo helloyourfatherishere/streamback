@@ -365,7 +365,6 @@ app.post("/signin", (req, res)=>{
     var findUser= async function(){
         try{
             var data= await user.findOne({email: email});
-            console.log(data)
             if(data || data!==null){
             var compare= await bcrypt.compare(pass, data.pass);
             console.log(compare)
