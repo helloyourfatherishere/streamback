@@ -369,22 +369,30 @@ app.post("/signin", (req, res)=>{
             var compare= await bcrypt.compare(pass, data.pass);
             console.log(compare)
             if(compare){
-                var token= await data.generate();
-                console.log(token)
-                res.set("Access-Control-Allow-Origin",req.headers.origin)
-                res.set('Access-Control-Allow-Credentials',"true")
-                res.cookie("jwt", token, {
-                    httpOnly: true,
-                    maxAge: 100* 10* 60 * 60 * 24 * 7 ,
-                    sameSite:"None",
-                    secure:true,
-                }).send({status:true});
-                
-                // res.cookie("jwt", token, {
-                //     httpOnly: true,
-                //     maxAge: 100* 10* 60 * 60 * 24 * 7 ,
-                //     secure:true,
-                // }).send({status:true});
+                let a=async function(){
+                    try{
+                        var token= await data.generate();
+                        console.log(`TOKEN:${token}`)
+                        res.set("Access-Control-Allow-Origin",req.headers.origin)
+                        res.set('Access-Control-Allow-Credentials',"true")
+                        res.cookie("jwt", token, {
+                            httpOnly: true,
+                            maxAge: 100* 10* 60 * 60 * 24 * 7 ,
+                            sameSite:"None",
+                            secure:true,
+                        }).send({status:true});
+                        
+                        // res.cookie("jwt", token, {
+                        //     httpOnly: true,
+                        //     maxAge: 100* 10* 60 * 60 * 24 * 7 ,
+                        //     secure:true,
+                        // }).send({status:true});
+
+                    }
+                    catch(e){
+                        console.log(e)
+                    }
+                }
         }
             else{
                 res.set("Access-Control-Allow-Origin",req.headers.origin)
@@ -541,6 +549,7 @@ app.post("/main", (req, res)=>{
 })
 app.get("/verify_user", (req, res)=>{
     let token= req.cookies.jwt;
+    console.log(token)
     let verify_user;
     if(!token || token== null || token== undefined ||token.length == 0){
         verify_user= false;
