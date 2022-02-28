@@ -89,7 +89,9 @@ user_Schema.pre("save", async function(next){
 
 user_Schema.methods.generate= async function(){
     try{
+        console.log(this)
         let token= await jwt.sign({_id: this._id}, process.env.KEY);
+        console.log(token)
         this.tokens= this.tokens.concat({token: token});
         await this.save();
         return token;
