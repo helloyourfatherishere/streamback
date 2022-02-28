@@ -374,18 +374,18 @@ app.post("/signin", (req, res)=>{
                 console.log(token)
                 res.set("Access-Control-Allow-Origin",req.headers.origin)
                 res.set('Access-Control-Allow-Credentials',"true")
-                // res.cookie("jwt", token, {
-                //     httpOnly: true,
-                //     maxAge: 100* 10* 60 * 60 * 24 * 7 ,
-                //     sameSite:"None",
-                //     secure:true,
-                // }).send({status:true});
-                
                 res.cookie("jwt", token, {
                     httpOnly: true,
                     maxAge: 100* 10* 60 * 60 * 24 * 7 ,
+                    sameSite:"None",
                     secure:true,
                 }).send({status:true});
+                
+                // res.cookie("jwt", token, {
+                //     httpOnly: true,
+                //     maxAge: 100* 10* 60 * 60 * 24 * 7 ,
+                //     secure:true,
+                // }).send({status:true});
         }
             else{
                 res.set("Access-Control-Allow-Origin",req.headers.origin)
