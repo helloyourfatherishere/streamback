@@ -561,7 +561,6 @@ app.post("/user_data", (req, res)=>{
     else{
         let f= async function(){
             try{
-                
             let verify=  jwt.verify(token, process.env.KEY);
             console.log(verify)
             let findUser= await user.findOne({_id: verify._id});
