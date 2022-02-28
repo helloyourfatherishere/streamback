@@ -13,7 +13,14 @@ var cartSchema= new mongoose.Schema({
     },
     title: {
         type: String
-    }
+    },
+    language: {
+        type: String
+    },
+    category: {
+        type: String
+    },
+
 })
 
 var cartDB = new mongoose.model("cart", cartSchema);

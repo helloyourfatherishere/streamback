@@ -67,23 +67,31 @@ app.post("/api", (req, res)=>{
             else{
                 user=true
             }
-        let main_data= await main.findOne({});
-        let poster= main_data.poster;
-        let pants = await product.find({$and: [{category: "pants"},  {visiblity: true}]}).sort({date: -1}).limit(20);
-        let shirts = await product.find({$and: [{category: "shirts"},  {visiblity: true}]}).sort({date: -1}).limit(20);
-        let tShirts = await product.find({$and: [{category: "t-shirts"},  {visiblity: true}]}).sort({date: -1}).limit(20);
-        let jackets = await product.find({$and: [{category: "jackets"},  {visiblity: true}]}).sort({date: -1}).limit(20);
-        let hoodies = await product.find({$and: [{category: "hoodies"},  {visiblity: true}]}).sort({date: -1}).limit(20);
-        let trouser = await product.find({$and: [{category: "trousers"},  {visiblity: true}]}).sort({date: -1}).limit(20);
-        let shalwarKameez = await product.find({$and: [{category: "shalwar-kameez"},  {visiblity: true}]}).sort({date: -1}).limit(20);
-        let kurti = await product.find({$and: [{category: "kurti"},  {visiblity: true}]}).sort({date: -1}).limit(20);
-        let collections = await product.find({$and: [{category: "three-piece"},  {visiblity: true}]}).sort({date: -1}).limit(20);
-        let undergarments = await product.find({$and: [{category: "undergarments"},  {visiblity: true}]}).sort({date: -1}).limit(20);
+        let a = await product.find({$and: [{category: "hollywood"},  {visiblity: true}]}).sort({date: -1}).limit(20);
+        let b = await product.find({$and: [{category: "bollywood"},  {visiblity: true}]}).sort({date: -1}).limit(20);
+        let c = await product.find({$and: [{category: "tamil"},  {visiblity: true}]}).sort({date: -1}).limit(20);
 
+        
+        let pos = await product.find({visiblity: true}).sort({date: -1}).limit(20);
+        // console.log(pos)
+
+        //POSTERS
+        let p1=Math.floor(Math.random() * 2)
+        let p2=Math.floor(Math.random() * 5)
+        let p3=Math.floor(Math.random() * 8) 
+        
+        console.log(p1+""+p2+""+p3)
+        let poster1=pos[p1]
+        let poster2=pos[p2]
+        let poster3=pos[p3]
+        
+        let po=[]
+        let poster=po.concat(poster1,poster2,poster3)
+        console.log(poster)
         res.set("Access-Control-Allow-Origin",req.headers.origin)
         res.set('Access-Control-Allow-Credentials',"true")
         res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
-        res.send([pants,shirts, tShirts,jackets,hoodies,trouser,shalwarKameez,kurti,collections,undergarments, poster, user ,poster]);
+        res.send([a,b, c, user,poster]);
         // res.render("index", {
         //     data: tShirts
         // })
@@ -172,7 +180,6 @@ app.post("/search", (req, res)=>{
 		try{
             var query= req.body.values;
             var findLocal= await product.find({$and:[{visiblity: true}, {$or: [{title: {$regex: query}},{keywords: {$regex: query}}, {search_keyword: {$regex: query}}, {category:{$regex: query}}]}]}).limit(30).sort({data: -1})
-            var findBrand= ""
             console.log(findLocal)
             // res.render("search", {
             //     local: findLocal,
@@ -182,7 +189,7 @@ app.post("/search", (req, res)=>{
         res.set("Access-Control-Allow-Origin",req.headers.origin)
         res.set('Access-Control-Allow-Credentials',"true")
         res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
-            res.send({findLocal, findBrand})
+            res.send({findLocal})
 		}catch{
 			(e)=>{
 				console.log(e);
@@ -194,62 +201,52 @@ app.post("/search", (req, res)=>{
 	f();
 })
 
-// app.get("/autocomplete", (req, res)=>{
-//     var regex1 = new RegExp(req.query["term"], 'i');
-// 	var db_data = product.find({search_keyword: {$regex: regex1}}).limit(6)
-// 	db_data.exec(function(err, data){
-// 		var result = [];
-// 		if(!err){
-// 			if(data && data.length && data.length>0){
-// 				data.forEach(user=>{
-// 					var obj={
-// 						id: user._id,
-// 						label: user.search_keyword
-// 					};
-// 					result.push(obj);
-// 				})
-// 			}
-// 			res.jsonp(result);
-// 		}
-// 		else{
-// 			(e)=>{console.log(e)}
-// 		}
-// 	});
-// })
+app.get("/autocomplete", (req, res)=>{
+    var regex1 = new RegExp(req.query["term"], 'i');
+	var db_data = product.find({search_keyword: {$regex: regex1}}).limit(6)
+	db_data.exec(function(err, data){
+		var result = [];
+		if(!err){
+			if(data && data.length && data.length>0){
+				data.forEach(user=>{
+					var obj={
+						id: user._id,
+						label: user.search_keyword
+					};
+					result.push(obj);
+				})
+			}
+			res.jsonp(result);
+		}
+		else{
+			(e)=>{console.log(e)}
+		}
+	});
+})
 app.post("/view/:id", (req, res)=>{
     var findData= async function(){
         var dataFind= await product.findOne({_id: req.params.id});
         console.log(dataFind)
         var dataObj= 
             {
-                images: dataFind.images,
-                brand_name: dataFind.brand_name,
                 keywords: dataFind.keywords,
                 date: dataFind.date,
                 comments: dataFind.comments,
                 _id: dataFind._id,
                 title: dataFind.title,
-                price: dataFind.price,
-                cut_price: dataFind.cut_price,
-                sell_price: dataFind.sell_price,
-                permission: dataFind.permission,
-                sell: dataFind.sell,
-                discount: dataFind.discount,
-                brand: dataFind.brand,
                 table: dataFind.table,
+                category: dataFind.category,
+                language: dataFind.language,
                 des: dataFind.des,
-                note: dataFind.note,
                 main_img: dataFind.main_img,
-                type: dataFind.type,
-                sizes: dataFind.sizes,
-                colors: dataFind.colors
+                main_video: dataFind.main_video,
               }
+              console.log(dataObj)
               var query= [dataFind.keywords];
               var i=query.map((val, ind)=>{
                   return( new RegExp(val))
               })
-            
-              var relatedProduct= await product.find({$and: [{keywords: {$in: i}}, {brand: true},{category:dataFind.category}]}).sort({data: -1}).limit(15);
+              var relatedProduct= await product.find({$and: [{visiblity: true},{category:{$regex:dataFind.category}}]}).sort({data: -1}).limit(15);
               
         res.set("Access-Control-Allow-Origin",req.headers.origin)
         res.set('Access-Control-Allow-Credentials',"true")
@@ -329,14 +326,11 @@ app.post("/signup", (req, res)=>{
     var add= async function(){
         try{
             console.log(req.body)
-        var {email, pass, name, contact_email, phone, address, security_code}= req.body;
+        var {email, pass,name, security_code}= req.body;
         var user_upload= new user({
             name: name,
             email: email,
-            pass: pass,
-            phone: phone,
-            contact_email: contact_email,
-            address: address,
+            pass:pass,
             security_code: security_code,
         });
         var data= new user(user_upload);
@@ -344,6 +338,7 @@ app.post("/signup", (req, res)=>{
         .then((d)=>{
             res.set("Access-Control-Allow-Origin",req.headers.origin)
             res.set('Access-Control-Allow-Credentials',"true")
+            console.log(d)
             res.send(true)
         }).catch((e)=>{
             if(e){
@@ -379,13 +374,19 @@ app.post("/signin", (req, res)=>{
                 console.log(token)
                 res.set("Access-Control-Allow-Origin",req.headers.origin)
                 res.set('Access-Control-Allow-Credentials',"true")
+                // res.cookie("jwt", token, {
+                //     httpOnly: true,
+                //     maxAge: 100* 10* 60 * 60 * 24 * 7 ,
+                //     sameSite:"None",
+                //     secure:true,
+                // }).send({status:true});
+                
                 res.cookie("jwt", token, {
                     httpOnly: true,
                     maxAge: 100* 10* 60 * 60 * 24 * 7 ,
-                    sameSite:"None",
                     secure:true,
                 }).send({status:true});
-            }
+        }
             else{
                 res.set("Access-Control-Allow-Origin",req.headers.origin)
                 res.set('Access-Control-Allow-Credentials',"true")
@@ -552,6 +553,36 @@ app.get("/verify_user", (req, res)=>{
     res.set('Access-Control-Allow-Credentials',"true")
     res.send({verify_user: verify_user})
 });
+app.post("/user_data", (req, res)=>{
+    let token= req.cookies.jwt;
+    let verify_user;
+    if(!token || token== null || token== undefined ||token.length == 0){
+        verify_user= false;
+    }
+    else{
+        let f= async function(){
+            try{
+                
+            let verify=  jwt.verify(token, process.env.KEY);
+            console.log(verify)
+            let findUser= await user.findOne({_id: verify._id});
+            console.log(findUser)
+            var data={
+                name:findUser.name,
+                email:findUser.email
+            }
+            res.set("Access-Control-Allow-Origin",req.headers.origin)
+            res.set('Access-Control-Allow-Credentials',"true")
+            res.send({data: data})
+            }
+            catch(e){
+                console.log(e)
+            }
+        }
+        f();
+    }
+});
+
 app.post("/u/cart", (req, res)=>{
     let token= req.cookies.jwt;
     if(!token || token== null || token== undefined ||token.length == 0){
@@ -565,7 +596,7 @@ app.post("/u/cart", (req, res)=>{
         try{
             let verify=  jwt.verify(token, process.env.KEY);
             let findUser= await user.findOne({_id: verify._id});
-            let userCart= findUser.cart;
+            let userCart= findUser.saved;
             let arr=[];
           if(userCart.length>0){
             for (var i=0; i<userCart.length; i++){
@@ -603,18 +634,19 @@ app.post("/addtocart/:id", (req, res)=>{
         res.set("Access-Control-Allow-Origin",req.headers.origin)
         res.set('Access-Control-Allow-Credentials',"true")
         res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
+        console.log("FALSE")
         res.send(false);
        
     }
     else{ var findUserANdToken= async function(){
+        console.log("TRUE")
         try{
         let productId=req.params.id;
         console.log(productId)
         var verify=  jwt.verify(token, process.env.KEY);
-            
         var findUser= await user.findOne({_id: verify._id});
         var findProduct= await product.findOne({_id: productId});
-        var userCart= findUser.cart;
+        var userCart= findUser.saved;
             
         var verifyCart= userCart.some((val,i)=>{
             return val==productId
@@ -623,18 +655,23 @@ app.post("/addtocart/:id", (req, res)=>{
             res.set("Access-Control-Allow-Origin",req.headers.origin)
             res.set('Access-Control-Allow-Credentials',"true")
             res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
-            res.send({status: false, type: 'added'})
+            res.send({status: false, type: 'saved'})
         }
         else{
-            let cart= findUser.cart=findUser.cart.concat(productId);
+            console.log("2")
+            let cart= findUser.saved=findUser.saved.concat(productId);
             var addCartDB= new cartDB({
                     userId: verify._id,
+                    userName:verify.name,
                     productId: productId,
                     img: findProduct.main_img.link,
-                    title: findProduct.title
+                    title: findProduct.title,
+                    category: findProduct.category,
+                    language: findProduct.language,
                 });
             var userSave=await findUser.save(); 
             var save=await addCartDB.save();
+            console.log(save)
             res.set("Access-Control-Allow-Origin",req.headers.origin)
             res.set('Access-Control-Allow-Credentials',"true")
             res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
@@ -656,11 +693,11 @@ app.post("/removeCart/:id/:product_id", (req, res)=>{
         let id =req.params.id;
         let productId= req.params.product_id;
         var findUser= await user.findOne({_id: id});
-        var cart= findUser.cart;
+        var cart= findUser.saved;
         var filter= cart.filter((val, ind)=>{
             return val !== productId
         })
-        var findUserAndUpdateCart= await user.findByIdAndUpdate({_id: id}, {$set: {cart: filter}},{
+        var findUserAndUpdateCart= await user.findByIdAndUpdate({_id: id}, {$set: {saved: filter}},{
             new: true, useFindAndModify: false
         });
         let removeCart= await cartDB.findByIdAndRemove({_id: productId},{
@@ -677,212 +714,212 @@ app.post("/removeCart/:id/:product_id", (req, res)=>{
     };
     findUserAndRemoveCart();
 });
-app.post("/u/order", (req, res)=>{
-    let token= req.cookies.jwt;
-    if(!token || token== null || token== undefined){
-        res.set("Access-Control-Allow-Origin",req.headers.origin)
-        res.set('Access-Control-Allow-Credentials',"true")
-        res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
-        res.send(false)
-    }
-    else{      
-        var findUserANdTokenCart= async function(){
-        try{
-            var verify=  jwt.verify(token, process.env.KEY);
-            var findUser= await user.findOne({_id: verify._id});
-            let order= findUser.order
-            console.log(order)
-            let c;
-            let a=[];
-            for (let i=0; i<=order.length; i++){
-                let findO= async function(a){
-                    try{
-                        let o=order[i]
-                        console.log(o)
-                        let index=i+1
-                        let findOrder= await orderDB.findOne({_id: o});
-                        let arr=a.push(findOrder)
+// app.post("/u/order", (req, res)=>{
+//     let token= req.cookies.jwt;
+//     if(!token || token== null || token== undefined){
+//         res.set("Access-Control-Allow-Origin",req.headers.origin)
+//         res.set('Access-Control-Allow-Credentials',"true")
+//         res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
+//         res.send(false)
+//     }
+//     else{      
+//         var findUserANdTokenCart= async function(){
+//         try{
+//             var verify=  jwt.verify(token, process.env.KEY);
+//             var findUser= await user.findOne({_id: verify._id});
+//             let order= findUser.order
+//             console.log(order)
+//             let c;
+//             let a=[];
+//             for (let i=0; i<=order.length; i++){
+//                 let findO= async function(a){
+//                     try{
+//                         let o=order[i]
+//                         console.log(o)
+//                         let index=i+1
+//                         let findOrder= await orderDB.findOne({_id: o});
+//                         let arr=a.push(findOrder)
 
-                        if(index===order.length){
-                            let c= a
-                            console.log("C"+ " "+ c)
-                            if(c[0] || c[0]!==null || c[0]!==undefined){
-                                res.set("Access-Control-Allow-Origin",req.headers.origin)
-                                res.set('Access-Control-Allow-Credentials',"true")
-                                res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
-                                res.send({product: c})            }
-                            else{
-                                res.set("Access-Control-Allow-Origin",req.headers.origin)
-                                res.set('Access-Control-Allow-Credentials',"true")
-                                res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
-                                res.send({product: []});
-                            }
-                        }
-                    }
-                    catch{
-                        (e)=>{console.log(e)}
-                    }
-                };
-                findO(a)
-            }
-        }
-        catch{
-            (e)=>{console.log(e)}
-        }
-    };
-    findUserANdTokenCart();
-    }
-})
-app.post("/order/register/:userId", (req, res)=>{
-    var reqData=req.body;
-    console.log(reqData)
-    var valueInArray= Object.values(reqData);
-    var len= valueInArray.length-7;
-    var save= async function(){
-        try{    
-            let name= JSON.stringify(req.body.name);
-            let email= JSON.stringify(req.body.email);
-            let phone= JSON.stringify(req.body.phone);
-            let whatsapp= JSON.stringify(req.body.whatsapp);
-            let address= JSON.stringify(req.body.address);
-            let message= JSON.stringify(req.body.message);
-            let arr=[]
-            let ProductData= valueInArray.find((val, i)=>{
-                let length=i+1
-                    var obj={
-                        id: val[0],
-                        img: val[1], 
-                        title: val[2],
-                        price: val[3],
-                        quantity: val[4],
-                        colors: val[5],
-                        sizes: val[6]
-                    }
-                let c= arr= arr.concat(obj)
-                if(length==len){
-                    let o =arr;
-                    var placeOrderInUser= async function(){
-                        let userDetails= await user.findOne({_id: req.params.userId});
-                        let cart= userDetails.cart;
+//                         if(index===order.length){
+//                             let c= a
+//                             console.log("C"+ " "+ c)
+//                             if(c[0] || c[0]!==null || c[0]!==undefined){
+//                                 res.set("Access-Control-Allow-Origin",req.headers.origin)
+//                                 res.set('Access-Control-Allow-Credentials',"true")
+//                                 res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
+//                                 res.send({product: c})            }
+//                             else{
+//                                 res.set("Access-Control-Allow-Origin",req.headers.origin)
+//                                 res.set('Access-Control-Allow-Credentials',"true")
+//                                 res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
+//                                 res.send({product: []});
+//                             }
+//                         }
+//                     }
+//                     catch{
+//                         (e)=>{console.log(e)}
+//                     }
+//                 };
+//                 findO(a)
+//             }
+//         }
+//         catch{
+//             (e)=>{console.log(e)}
+//         }
+//     };
+//     findUserANdTokenCart();
+//     }
+// })
+// app.post("/order/register/:userId", (req, res)=>{
+//     var reqData=req.body;
+//     console.log(reqData)
+//     var valueInArray= Object.values(reqData);
+//     var len= valueInArray.length-7;
+//     var save= async function(){
+//         try{    
+//             let name= JSON.stringify(req.body.name);
+//             let email= JSON.stringify(req.body.email);
+//             let phone= JSON.stringify(req.body.phone);
+//             let whatsapp= JSON.stringify(req.body.whatsapp);
+//             let address= JSON.stringify(req.body.address);
+//             let message= JSON.stringify(req.body.message);
+//             let arr=[]
+//             let ProductData= valueInArray.find((val, i)=>{
+//                 let length=i+1
+//                     var obj={
+//                         id: val[0],
+//                         img: val[1], 
+//                         title: val[2],
+//                         price: val[3],
+//                         quantity: val[4],
+//                         colors: val[5],
+//                         sizes: val[6]
+//                     }
+//                 let c= arr= arr.concat(obj)
+//                 if(length==len){
+//                     let o =arr;
+//                     var placeOrderInUser= async function(){
+//                         let userDetails= await user.findOne({_id: req.params.userId});
+//                         let cart= userDetails.cart;
     
-                        var cartUpdate= userDetails.cart= [];
-                        let userDetail={
-                            id: req.params.userId,
-                            name: name,
-                            email: email,
-                            phone: phone,
-                            whatsapp: whatsapp,
-                            address: address,
-                            message: message
-                        };
-                        let placeOrder= new orderDB({
-                            userId: req.params.userId,
-                            userDetails: userDetail,
-                            orderDetails: o,
-                            paymentMethod: req.body.paymentMethod
-                        });
-                        let ab=await placeOrder.save();
-                        var order= userDetails.order= userDetails.order.concat(ab._id);
-                        var s=await userDetails.save();
-                            // res.redirect("/cart");
-                        res.set("Access-Control-Allow-Origin",req.headers.origin)
-                        res.set('Access-Control-Allow-Credentials',"true")
-                        res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
-                        res.redirect("https://tmwords.netlify.app/")
-                    };placeOrderInUser();
-                }
-            })
-    }
-    catch{
-        (e)=>{console.log(e)}
-    }
-    };
-    save();
-});
+//                         var cartUpdate= userDetails.cart= [];
+//                         let userDetail={
+//                             id: req.params.userId,
+//                             name: name,
+//                             email: email,
+//                             phone: phone,
+//                             whatsapp: whatsapp,
+//                             address: address,
+//                             message: message
+//                         };
+//                         let placeOrder= new orderDB({
+//                             userId: req.params.userId,
+//                             userDetails: userDetail,
+//                             orderDetails: o,
+//                             paymentMethod: req.body.paymentMethod
+//                         });
+//                         let ab=await placeOrder.save();
+//                         var order= userDetails.order= userDetails.order.concat(ab._id);
+//                         var s=await userDetails.save();
+//                             // res.redirect("/cart");
+//                         res.set("Access-Control-Allow-Origin",req.headers.origin)
+//                         res.set('Access-Control-Allow-Credentials',"true")
+//                         res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
+//                         res.redirect("https://tmwords.netlify.app/")
+//                     };placeOrderInUser();
+//                 }
+//             })
+//     }
+//     catch{
+//         (e)=>{console.log(e)}
+//     }
+//     };
+//     save();
+// });
 
-app.post("/order/unregistered", (req, res)=>{
-    var orderUnregister= async function(){
-        try{
-        let token= req.cookies.jwt
-        if(!token  ||token== null || token== undefined || token.length == 0){
-            let addProductUnregister= async function(){
-            try{
-                let {paymentMethod, id, price, img, title, quantity, colors, sizes, message, name, email, phone, whatsapp, address}= req.body
-                let insert= new orderUnregisterDB({
-                    name: name,
-                    email: email,
-                    phone: phone,
-                    whatsapp: whatsapp,
-                    address: address,
-                    paymentMethod:paymentMethod,
-                    id: id,
-                    img: img,
-                    title: title,
-                    price: price,
-                    quantity: quantity,
-                    colors: colors,
-                    sizes: sizes,
-                    message:message
-                });
-                let result = await insert.save();
-                console.log(result)
-                res.set("Access-Control-Allow-Origin",req.headers.origin)
-                res.set('Access-Control-Allow-Credentials',"true")
-                res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
-                res.send(true)
-            }
-            catch{
-                (e)=>{
-                    console.log(e)
-                }
-            }
-            };
-            addProductUnregister();
+// app.post("/order/unregistered", (req, res)=>{
+//     var orderUnregister= async function(){
+//         try{
+//         let token= req.cookies.jwt
+//         if(!token  ||token== null || token== undefined || token.length == 0){
+//             let addProductUnregister= async function(){
+//             try{
+//                 let {paymentMethod, id, price, img, title, quantity, colors, sizes, message, name, email, phone, whatsapp, address}= req.body
+//                 let insert= new orderUnregisterDB({
+//                     name: name,
+//                     email: email,
+//                     phone: phone,
+//                     whatsapp: whatsapp,
+//                     address: address,
+//                     paymentMethod:paymentMethod,
+//                     id: id,
+//                     img: img,
+//                     title: title,
+//                     price: price,
+//                     quantity: quantity,
+//                     colors: colors,
+//                     sizes: sizes,
+//                     message:message
+//                 });
+//                 let result = await insert.save();
+//                 console.log(result)
+//                 res.set("Access-Control-Allow-Origin",req.headers.origin)
+//                 res.set('Access-Control-Allow-Credentials',"true")
+//                 res.set('Access-Control-Allow-Headers',"GET,POST,PUT,DELTE")
+//                 res.send(true)
+//             }
+//             catch{
+//                 (e)=>{
+//                     console.log(e)
+//                 }
+//             }
+//             };
+//             addProductUnregister();
                 
-        }
-        else{
-            var addProductRegister= async function(){
-            var verify=  jwt.verify(token, process.env.KEY);
-            var findUser= await user.findOne({_id: verify._id});
-            let {paymentMethod, id, price,img, title, quantity, colors, sizes,message, name, email, phone, whatsapp, address}= req.body;
-            let userDetail={
-                id: findUser._id,
-                name: name,
-                email: email,
-                phone: phone,
-                whatsapp: whatsapp,
-                address: address,
-                message: message
-            };
+//         }
+//         else{
+//             var addProductRegister= async function(){
+//             var verify=  jwt.verify(token, process.env.KEY);
+//             var findUser= await user.findOne({_id: verify._id});
+//             let {paymentMethod, id, price,img, title, quantity, colors, sizes,message, name, email, phone, whatsapp, address}= req.body;
+//             let userDetail={
+//                 id: findUser._id,
+//                 name: name,
+//                 email: email,
+//                 phone: phone,
+//                 whatsapp: whatsapp,
+//                 address: address,
+//                 message: message
+//             };
             
-            let orderDetail={  
-                id: id,
-                img: img, 
-                title: title,
-                price:  price,
-                quantity: quantity,
-                colors: colors,
-                sizes: sizes
-            }
-            let placeOrder= new orderDB({
-                userId: findUser._id,
-                userDetails: userDetail,
-                orderDetails: orderDetail,
-                paymentMethod: paymentMethod
-            });
-            let ab=await placeOrder.save();
-            let o = findUser.order=findUser.order.concat(ab._id);
-            let s= await findUser.save();
-            res.redirect(true)
-            };
-            addProductRegister();
-        }
-        }catch{
-            (e)=>{console.log(e)}
-        }
-    };
-    orderUnregister();
-});
+//             let orderDetail={  
+//                 id: id,
+//                 img: img, 
+//                 title: title,
+//                 price:  price,
+//                 quantity: quantity,
+//                 colors: colors,
+//                 sizes: sizes
+//             }
+//             let placeOrder= new orderDB({
+//                 userId: findUser._id,
+//                 userDetails: userDetail,
+//                 orderDetails: orderDetail,
+//                 paymentMethod: paymentMethod
+//             });
+//             let ab=await placeOrder.save();
+//             let o = findUser.order=findUser.order.concat(ab._id);
+//             let s= await findUser.save();
+//             res.redirect(true)
+//             };
+//             addProductRegister();
+//         }
+//         }catch{
+//             (e)=>{console.log(e)}
+//         }
+//     };
+//     orderUnregister();
+// });
 
 app.get("/logout", (req, res)=>{
     let token= req.cookies.jwt;
