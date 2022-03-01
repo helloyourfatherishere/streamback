@@ -1,7 +1,7 @@
 var mongoose= require("mongoose");
+require("dotenv").config();
 // var db= "mongodb://localhost:27017/stream"
-
-var db = "mongodb+srv://stream:webWorkFirst_1104@cluster0.fwcin.mongodb.net/stream?retryWrites=true&w=majority"
+var db = process.env.DB;
 mongoose.connect(db,
     {useNewUrlParser: true,
     useUnifiedTopology: true,
